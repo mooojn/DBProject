@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace DBProject
 {
-    public partial class Form1 : Form
+    public partial class Uet : Form
     {
-        public Form1()
+        public Uet()
         {
             InitializeComponent();
         }
