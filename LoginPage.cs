@@ -7,11 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace DBProject
 {
     public partial class Uet : Form
     {
+        public static string connectionString = "Data Source=DESKTOP-AJHCE58\\MOOOJN;Initial Catalog=ProjectB;Integrated Security=True";
         public Uet()
         {
             InitializeComponent();
