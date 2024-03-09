@@ -1,3 +1,7 @@
-
 *.vsidx
-.vs/DBProject/FileContentIndex/55c17c51-b57f-477f-825f-65365d93a39f.vsidx
+*.suo
+*.exe
+*.pdb
+*.config
+*.txt
+*.cache
