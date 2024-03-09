@@ -9,3 +9,15 @@ D:\c# files\DBProject\obj\Debug\DBProject.csproj.CoreCompileInputs.cache
 D:\c# files\DBProject\obj\Debug\DBProject.exe
 D:\c# files\DBProject\obj\Debug\DBProject.pdb
 D:\c# files\DBProject\obj\Debug\DBProject.Dashboard.resources
+C:\Users\moon\Desktop\DBProject\bin\Debug\DBProject.exe.config
+C:\Users\moon\Desktop\DBProject\bin\Debug\DBProject.exe
+C:\Users\moon\Desktop\DBProject\bin\Debug\DBProject.pdb
+C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.csproj.AssemblyReference.cache
+C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.Uet.resources
+C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.Dashboard.resources
+C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.Properties.Resources.resources
+C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.csproj.GenerateResource.cache
+C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.csproj.CoreCompileInputs.cache
+C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.exe
+C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.pdb
+C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.Students.resources
