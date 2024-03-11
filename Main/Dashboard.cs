@@ -28,5 +28,12 @@ namespace DBProject
             this.Hide();
             s.Show();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Clos c = new Clos();
+            this.Hide();
+            c.Show();
+        }
     }
 }
