@@ -53,34 +53,36 @@ namespace DBProject
         private void button1_Click_1(object sender, EventArgs e)
         {
             panel1.Show();
+            panel2.Hide();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             panel1.Hide();
+            panel2.Hide();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            panel1.Hide();
             panel2.Show();
             Program.connection.Open();
-            string query = "Select RegistrationNumber AS RegNo," +
-                "Concat(FirstName, ' ' , LastName) AS FullName," +
-                "Contact from Student";
+            string query = "SELECT RegistrationNumber AS RegNo," +
+                "CONCAT(FirstName, ' ' , LastName) AS FullName," +
+                "Contact FROM Student";
             SqlDataAdapter sda = new SqlDataAdapter(query, Program.connection);
-            
             DataTable dt = new DataTable();
-            
             sda.Fill(dt);
 
             dataGridView1.DataSource = dt;
 
             Program.connection.Close();
-
         }
+
 
         private void button5_Click(object sender, EventArgs e)
         {
+            panel1.Hide();
             panel2.Hide();
         }
 
