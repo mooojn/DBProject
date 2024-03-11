@@ -8,3 +8,8 @@
 .vs/DBProject.csproj.dtbcache.json
 *.exe
 bin/Debug/DBProject.pdb
+obj/Debug/DBProject.Clos.resources
+obj/Debug/DBProject.csproj.CoreCompileInputs.cache
+obj/Debug/DBProject.csproj.FileListAbsolute.txt
+obj/Debug/DBProject.csproj.GenerateResource.cache
+obj/Debug/DBProject.exe
