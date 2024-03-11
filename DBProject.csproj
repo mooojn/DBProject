@@ -52,6 +52,12 @@
     <Compile Include="LoginPage.Designer.cs">
       <DependentUpon>LoginPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Main\Clos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\Clos.Designer.cs">
+      <DependentUpon>Clos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main\Dashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,6 +74,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="LoginPage.resx">
       <DependentUpon>LoginPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\Clos.resx">
+      <DependentUpon>Clos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main\Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
