@@ -175,7 +175,7 @@
             // 
             this.panel2.Controls.Add(this.button5);
             this.panel2.Controls.Add(this.dataGridView1);
-            this.panel2.Location = new System.Drawing.Point(219, 39);
+            this.panel2.Location = new System.Drawing.Point(228, 36);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(857, 525);
             this.panel2.TabIndex = 20;
