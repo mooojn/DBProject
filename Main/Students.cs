@@ -20,16 +20,17 @@ namespace DBProject
 
         private void Students_Load(object sender, EventArgs e)
         {
-            panel1.Hide();
-            panel2.Hide();
+            addStudentPanel.Hide();
+            dataGridView1.Hide();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void button8_Click(object sender, EventArgs e)
         {
-
+            addStudentPanel.Show();
+            dataGridView1.Hide();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button6_Click(object sender, EventArgs e)
         {
             Program.connection.Open();
 
@@ -50,22 +51,10 @@ namespace DBProject
             MessageBox.Show("Data has been inserted");
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void button4_Click_1(object sender, EventArgs e)
         {
-            panel1.Show();
-            panel2.Hide();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            panel1.Hide();
-            panel2.Hide();
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            panel1.Hide();
-            panel2.Show();
+            addStudentPanel.Hide();
+            dataGridView1.Show();
             Program.connection.Open();
             string query = "SELECT RegistrationNumber AS RegNo," +
                 "CONCAT(FirstName, ' ' , LastName) AS FullName," +
@@ -79,20 +68,9 @@ namespace DBProject
             Program.connection.Close();
         }
 
-
-        private void button5_Click(object sender, EventArgs e)
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            panel1.Hide();
-            panel2.Hide();
-        }
 
-        private void button7_Click(object sender, EventArgs e)
-        {
-            panel1.Hide();
-            panel2.Hide();
-            Dashboard dashboard = new Dashboard();
-            this.Hide();
-            dashboard.Show();
         }
     }
 }
