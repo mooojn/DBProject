@@ -18,6 +18,7 @@ namespace DBProject
         public Dashboard()
         {
             InitializeComponent();
+            this.Size = new Size(1240, 1080);
         }
 
         private void Dashboard_Load(object sender, EventArgs e)

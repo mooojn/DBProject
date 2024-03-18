@@ -78,14 +78,14 @@
             this.mainPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.mainPanel.Location = new System.Drawing.Point(0, 0);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(365, 747);
+            this.mainPanel.Size = new System.Drawing.Size(365, 1169);
             this.mainPanel.TabIndex = 2;
             // 
             // panel
             // 
-            this.panel.Location = new System.Drawing.Point(421, 64);
+            this.panel.Location = new System.Drawing.Point(368, 0);
             this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(866, 572);
+            this.panel.Size = new System.Drawing.Size(966, 750);
             this.panel.TabIndex = 3;
             this.panel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -93,9 +93,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1357, 747);
+            this.ClientSize = new System.Drawing.Size(1346, 1169);
             this.Controls.Add(this.panel);
             this.Controls.Add(this.mainPanel);
+            this.MinimumSize = new System.Drawing.Size(1240, 1080);
             this.Name = "Dashboard";
             this.Text = "Dashboard";
             this.Load += new System.EventHandler(this.Dashboard_Load);
