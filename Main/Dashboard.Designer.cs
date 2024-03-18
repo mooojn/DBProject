@@ -31,8 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel1.SuspendLayout();
+            this.mainPanel = new System.Windows.Forms.Panel();
+            this.panel = new System.Windows.Forms.Panel();
+            this.mainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -69,27 +70,36 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // panel1
+            // mainPanel
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.button2);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(365, 747);
-            this.panel1.TabIndex = 2;
+            this.mainPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.mainPanel.Controls.Add(this.button1);
+            this.mainPanel.Controls.Add(this.button2);
+            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.mainPanel.Location = new System.Drawing.Point(0, 0);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(365, 747);
+            this.mainPanel.TabIndex = 2;
+            // 
+            // panel
+            // 
+            this.panel.Location = new System.Drawing.Point(421, 64);
+            this.panel.Name = "panel";
+            this.panel.Size = new System.Drawing.Size(866, 572);
+            this.panel.TabIndex = 3;
+            this.panel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1148, 747);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(1357, 747);
+            this.Controls.Add(this.panel);
+            this.Controls.Add(this.mainPanel);
             this.Name = "Dashboard";
             this.Text = "Dashboard";
             this.Load += new System.EventHandler(this.Dashboard_Load);
-            this.panel1.ResumeLayout(false);
+            this.mainPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -98,6 +108,7 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel mainPanel;
+        private System.Windows.Forms.Panel panel;
     }
 }
