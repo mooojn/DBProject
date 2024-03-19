@@ -1,6 +1,6 @@
 ﻿namespace DBProject
 {
-    partial class Students
+    partial class Student
     {
         /// <summary>
         /// Required designer variable.
@@ -30,37 +30,44 @@
         {
             this.addStudentPanel = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.stdRegNoBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.stdEmailBox = new System.Windows.Forms.TextBox();
+            this.stdContactBox = new System.Windows.Forms.TextBox();
+            this.stdLastNameBox = new System.Windows.Forms.TextBox();
+            this.stdFirstNameBox = new System.Windows.Forms.TextBox();
             this.button6 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.addStudentPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // addStudentPanel
             // 
+            this.addStudentPanel.Controls.Add(this.button3);
+            this.addStudentPanel.Controls.Add(this.button2);
+            this.addStudentPanel.Controls.Add(this.button1);
             this.addStudentPanel.Controls.Add(this.label5);
-            this.addStudentPanel.Controls.Add(this.textBox5);
+            this.addStudentPanel.Controls.Add(this.stdRegNoBox);
             this.addStudentPanel.Controls.Add(this.label4);
             this.addStudentPanel.Controls.Add(this.label3);
             this.addStudentPanel.Controls.Add(this.label2);
             this.addStudentPanel.Controls.Add(this.label1);
-            this.addStudentPanel.Controls.Add(this.textBox4);
-            this.addStudentPanel.Controls.Add(this.textBox2);
-            this.addStudentPanel.Controls.Add(this.textBox3);
-            this.addStudentPanel.Controls.Add(this.textBox1);
+            this.addStudentPanel.Controls.Add(this.stdEmailBox);
+            this.addStudentPanel.Controls.Add(this.stdContactBox);
+            this.addStudentPanel.Controls.Add(this.stdLastNameBox);
+            this.addStudentPanel.Controls.Add(this.stdFirstNameBox);
             this.addStudentPanel.Controls.Add(this.button6);
             this.addStudentPanel.Location = new System.Drawing.Point(25, 27);
             this.addStudentPanel.Name = "addStudentPanel";
-            this.addStudentPanel.Size = new System.Drawing.Size(499, 384);
+            this.addStudentPanel.Size = new System.Drawing.Size(822, 384);
             this.addStudentPanel.TabIndex = 28;
             // 
             // label5
@@ -72,12 +79,12 @@
             this.label5.TabIndex = 20;
             this.label5.Text = "RegNo";
             // 
-            // textBox5
+            // stdRegNoBox
             // 
-            this.textBox5.Location = new System.Drawing.Point(203, 245);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(241, 31);
-            this.textBox5.TabIndex = 19;
+            this.stdRegNoBox.Location = new System.Drawing.Point(203, 245);
+            this.stdRegNoBox.Name = "stdRegNoBox";
+            this.stdRegNoBox.Size = new System.Drawing.Size(241, 31);
+            this.stdRegNoBox.TabIndex = 19;
             // 
             // label4
             // 
@@ -115,37 +122,37 @@
             this.label1.TabIndex = 15;
             this.label1.Text = "First Name";
             // 
-            // textBox4
+            // stdEmailBox
             // 
-            this.textBox4.Location = new System.Drawing.Point(203, 193);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(241, 31);
-            this.textBox4.TabIndex = 14;
+            this.stdEmailBox.Location = new System.Drawing.Point(203, 193);
+            this.stdEmailBox.Name = "stdEmailBox";
+            this.stdEmailBox.Size = new System.Drawing.Size(241, 31);
+            this.stdEmailBox.TabIndex = 14;
             // 
-            // textBox2
+            // stdContactBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(203, 135);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(241, 31);
-            this.textBox2.TabIndex = 13;
+            this.stdContactBox.Location = new System.Drawing.Point(203, 135);
+            this.stdContactBox.Name = "stdContactBox";
+            this.stdContactBox.Size = new System.Drawing.Size(241, 31);
+            this.stdContactBox.TabIndex = 13;
             // 
-            // textBox3
+            // stdLastNameBox
             // 
-            this.textBox3.Location = new System.Drawing.Point(203, 80);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(241, 31);
-            this.textBox3.TabIndex = 12;
+            this.stdLastNameBox.Location = new System.Drawing.Point(203, 80);
+            this.stdLastNameBox.Name = "stdLastNameBox";
+            this.stdLastNameBox.Size = new System.Drawing.Size(241, 31);
+            this.stdLastNameBox.TabIndex = 12;
             // 
-            // textBox1
+            // stdFirstNameBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(203, 25);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(241, 31);
-            this.textBox1.TabIndex = 11;
+            this.stdFirstNameBox.Location = new System.Drawing.Point(203, 25);
+            this.stdFirstNameBox.Name = "stdFirstNameBox";
+            this.stdFirstNameBox.Size = new System.Drawing.Size(241, 31);
+            this.stdFirstNameBox.TabIndex = 11;
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(154, 299);
+            this.button6.Location = new System.Drawing.Point(46, 299);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(168, 65);
             this.button6.TabIndex = 10;
@@ -166,6 +173,36 @@
             this.dataGridView1.TabIndex = 31;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_1);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(302, 299);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(168, 65);
+            this.button1.TabIndex = 21;
+            this.button1.Text = "Update Record";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(528, 299);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(168, 65);
+            this.button2.TabIndex = 22;
+            this.button2.Text = "Delete Record";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(523, 180);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(173, 83);
+            this.button3.TabIndex = 23;
+            this.button3.Text = "Mark Attendance";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // Students
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -173,8 +210,8 @@
             this.ClientSize = new System.Drawing.Size(1417, 855);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.addStudentPanel);
+            this.MinimumSize = new System.Drawing.Size(820, 520);
             this.Name = "Students";
-            this.Text = "Students";
             this.Load += new System.EventHandler(this.Students_Load);
             this.addStudentPanel.ResumeLayout(false);
             this.addStudentPanel.PerformLayout();
@@ -189,13 +226,17 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox stdEmailBox;
+        private System.Windows.Forms.TextBox stdContactBox;
+        private System.Windows.Forms.TextBox stdLastNameBox;
+        private System.Windows.Forms.TextBox stdFirstNameBox;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox stdRegNoBox;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button button1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
