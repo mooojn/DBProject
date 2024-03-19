@@ -20,5 +20,9 @@ C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.csproj.GenerateResource.cach
 C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.csproj.CoreCompileInputs.cache
 C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.exe
 C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.pdb
-C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.Students.resources
-C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.Clos.resources
+C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.Attendance.resources
+C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.Main.Assesment.resources
+C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.Clo.resources
+C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.Main.Rubric.resources
+C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.Main.RubricLevel.resources
+C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.Student.resources
