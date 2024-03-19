@@ -18,7 +18,8 @@ namespace DBProject
         public Dashboard()
         {
             InitializeComponent();
-            this.Size = new Size(1240, 1080);
+            this.Size = new Size(820, 520);
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
 
         private void Dashboard_Load(object sender, EventArgs e)
@@ -27,12 +28,12 @@ namespace DBProject
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            openChildForm(new Students(), sender);
+            openChildForm(new Student(), sender);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            openChildForm(new Clos(), sender);
+            openChildForm(new Clo(), sender);
         }
         private void openChildForm(Form child, object sender)
         {
