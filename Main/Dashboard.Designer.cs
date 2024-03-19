@@ -32,10 +32,10 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.panel = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.panel = new System.Windows.Forms.Panel();
             this.mainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -87,29 +87,22 @@
             this.mainPanel.Size = new System.Drawing.Size(365, 953);
             this.mainPanel.TabIndex = 2;
             // 
-            // panel
+            // button5
             // 
-            this.panel.Location = new System.Drawing.Point(368, 0);
-            this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(966, 941);
-            this.panel.TabIndex = 3;
-            this.panel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
-            // 
-            // button3
-            // 
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.875F);
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
-            this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.Location = new System.Drawing.Point(12, 414);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(353, 112);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Manage Rubrics";
-            this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button3.UseVisualStyleBackColor = true;
+            this.button5.FlatAppearance.BorderSize = 0;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.875F);
+            this.button5.ForeColor = System.Drawing.Color.White;
+            this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
+            this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button5.Location = new System.Drawing.Point(12, 684);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(353, 112);
+            this.button5.TabIndex = 4;
+            this.button5.Text = "Manage Rubric Level";
+            this.button5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button4
             // 
@@ -126,22 +119,32 @@
             this.button4.Text = "Manage Assesment";
             this.button4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // button5
+            // button3
             // 
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.875F);
-            this.button5.ForeColor = System.Drawing.Color.White;
-            this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
-            this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button5.Location = new System.Drawing.Point(12, 684);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(353, 112);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "Manage Rubric Level";
-            this.button5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button5.UseVisualStyleBackColor = true;
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.875F);
+            this.button3.ForeColor = System.Drawing.Color.White;
+            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
+            this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button3.Location = new System.Drawing.Point(12, 414);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(353, 112);
+            this.button3.TabIndex = 2;
+            this.button3.Text = "Manage Rubrics";
+            this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // panel
+            // 
+            this.panel.Location = new System.Drawing.Point(368, 0);
+            this.panel.Name = "panel";
+            this.panel.Size = new System.Drawing.Size(966, 941);
+            this.panel.TabIndex = 3;
+            this.panel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // Dashboard
             // 

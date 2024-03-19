@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DBProject.Main;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -57,6 +58,21 @@ namespace DBProject
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
              
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            openChildForm(new Assesment(), sender);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            openChildForm(new Rubric(), sender);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            openChildForm(new RubricLevel(), sender);
         }
     }
 }
