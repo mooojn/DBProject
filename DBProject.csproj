@@ -58,6 +58,12 @@
     <Compile Include="Main\Assesment.Designer.cs">
       <DependentUpon>Assesment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Main\EvaluateResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\EvaluateResult.Designer.cs">
+      <DependentUpon>EvaluateResult.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main\Sub\AssesmentComponent.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +113,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Main\Assesment.resx">
       <DependentUpon>Assesment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\EvaluateResult.resx">
+      <DependentUpon>EvaluateResult.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main\Sub\AssesmentComponent.resx">
       <DependentUpon>AssesmentComponent.cs</DependentUpon>

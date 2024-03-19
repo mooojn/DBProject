@@ -36,6 +36,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.panel = new System.Windows.Forms.Panel();
+            this.button6 = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,6 +77,7 @@
             // mainPanel
             // 
             this.mainPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.mainPanel.Controls.Add(this.button6);
             this.mainPanel.Controls.Add(this.button5);
             this.mainPanel.Controls.Add(this.button4);
             this.mainPanel.Controls.Add(this.button3);
@@ -146,6 +148,23 @@
             this.panel.TabIndex = 3;
             this.panel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
+            // button6
+            // 
+            this.button6.FlatAppearance.BorderSize = 0;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.875F);
+            this.button6.ForeColor = System.Drawing.Color.White;
+            this.button6.Image = ((System.Drawing.Image)(resources.GetObject("button6.Image")));
+            this.button6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button6.Location = new System.Drawing.Point(12, 788);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(353, 112);
+            this.button6.TabIndex = 5;
+            this.button6.Text = "Evaluate Result";
+            this.button6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -171,5 +190,6 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button6;
     }
 }
