@@ -58,10 +58,16 @@
     <Compile Include="Main\Assesment.Designer.cs">
       <DependentUpon>Assesment.cs</DependentUpon>
     </Compile>
-    <Compile Include="Main\Attendance.cs">
+    <Compile Include="Main\Sub\AssesmentComponent.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Main\Attendance.Designer.cs">
+    <Compile Include="Main\Sub\AssesmentComponent.Designer.cs">
+      <DependentUpon>AssesmentComponent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main\Sub\Attendance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\Sub\Attendance.Designer.cs">
       <DependentUpon>Attendance.cs</DependentUpon>
     </Compile>
     <Compile Include="Main\Clo.cs">
@@ -102,7 +108,10 @@
     <EmbeddedResource Include="Main\Assesment.resx">
       <DependentUpon>Assesment.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Main\Attendance.resx">
+    <EmbeddedResource Include="Main\Sub\AssesmentComponent.resx">
+      <DependentUpon>AssesmentComponent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\Sub\Attendance.resx">
       <DependentUpon>Attendance.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main\Clo.resx">

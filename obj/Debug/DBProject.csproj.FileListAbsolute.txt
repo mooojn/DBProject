@@ -21,8 +21,9 @@ C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.csproj.CoreCompileInputs.cac
 C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.exe
 C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.pdb
 C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.Attendance.resources
-C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.Main.Assesment.resources
 C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.Clo.resources
-C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.Main.Rubric.resources
 C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.Main.RubricLevel.resources
 C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.Student.resources
+C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.Assesment.resources
+C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.AssesmentComponent.resources
+C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.Rubric.resources
