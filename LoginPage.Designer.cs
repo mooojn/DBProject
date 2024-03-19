@@ -39,7 +39,7 @@
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.875F);
             this.textBox1.Location = new System.Drawing.Point(229, 153);
             this.textBox1.Name = "textBox1";
-            this.textBox1.PasswordChar = 'x';
+            this.textBox1.PasswordChar = '*';
             this.textBox1.Size = new System.Drawing.Size(327, 43);
             this.textBox1.TabIndex = 0;
             // 
@@ -80,6 +80,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Uet";
             this.Text = "Uet";
+            this.Load += new System.EventHandler(this.Uet_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -16,6 +16,7 @@ namespace DBProject
         public Uet()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -31,6 +32,10 @@ namespace DBProject
             {
                 MessageBox.Show("Invalid Password");
             }
+        }
+
+        private void Uet_Load(object sender, EventArgs e)
+        {
         }
     }
 }
