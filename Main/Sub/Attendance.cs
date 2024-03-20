@@ -20,9 +20,7 @@ namespace DBProject
 
         private void Attendance_Load(object sender, EventArgs e)
         {
-
             loadRegNo();
-
             loadStatus();
         }
         private void loadRegNo() 
@@ -59,26 +57,51 @@ namespace DBProject
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (textBoxIsNull())
+            {
+                MessageBox.Show("Please fill all the fields", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             insertIntoclassAttendance();
-            int id = getId();
+            int stdId = getId();
+            int attendanceId = getAttendanceId();
             int status = getStatus();
-            //MessageBox.Show(id.ToString() + status.ToString());
-           
+
             Program.connection.Open();
             string query = "INSERT INTO StudentAttendance VALUES (@id, @StdId, @AttendanceStatus)";
             
             var cmd = new SqlCommand(query, Program.connection);
-            cmd.Parameters.AddWithValue("@id", 1);    /// change id to auto increment
-            cmd.Parameters.AddWithValue("@StdId", id);
+            cmd.Parameters.AddWithValue("@id", attendanceId);    /// change id to auto increment
+            cmd.Parameters.AddWithValue("@StdId", stdId);
             cmd.Parameters.AddWithValue("@AttendanceStatus", status);
 
             cmd.ExecuteNonQuery();
 
             Program.connection.Close();
+            MessageBox.Show("Attendance Marked", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+        }
+        private int getAttendanceId()
+        {
+            Program.connection.Open();
+            string query = "SELECT MAX(Id) FROM ClassAttendance";
+            var cmd = new SqlCommand(query, Program.connection);
+            var reader = cmd.ExecuteReader();
+            int id = -1;
+            while (reader.Read())
+            {
+                id = reader.GetInt32(0);
+            }
+            Program.connection.Close();
+            return id;
         }
         private void insertIntoclassAttendance()
         {
+            if (textBoxIsNull())
+            {
+                MessageBox.Show("Please fill all the fields", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             Program.connection.Open();
             string query = "INSERT INTO ClassAttendance VALUES (@Date)";
             var cmd = new SqlCommand(query, Program.connection);
@@ -123,6 +146,19 @@ namespace DBProject
 
             Program.connection.Close();
             return id;
+        }
+        private bool textBoxIsNull()
+        {
+            if (RegNoComboBox.Text == "" || StatusComboBox.Text == "")
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
