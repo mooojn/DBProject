@@ -130,8 +130,8 @@ namespace DBProject
         private void Mark_Attendance(object sender, EventArgs e)
         {
             Form form = new Attendance();
+            form.StartPosition = FormStartPosition.CenterScreen;
             form.Show();
-
         }
 
         private void hideUdBtn_Click(object sender, EventArgs e)

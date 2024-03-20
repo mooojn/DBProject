@@ -28,3 +28,4 @@ C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.Assesment.resources
 C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.AssesmentComponent.resources
 C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.Rubric.resources
 C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.EvaluateResult.resources
+C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.Main.Home.resources

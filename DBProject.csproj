@@ -107,6 +107,12 @@
     <Compile Include="Main\Student.Designer.cs">
       <DependentUpon>Student.cs</DependentUpon>
     </Compile>
+    <Compile Include="Main\Sub\Home.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\Sub\Home.Designer.cs">
+      <DependentUpon>Home.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="LoginPage.resx">
@@ -138,6 +144,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Main\Student.resx">
       <DependentUpon>Student.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\Sub\Home.resx">
+      <DependentUpon>Home.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
