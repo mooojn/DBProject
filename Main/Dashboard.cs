@@ -25,7 +25,7 @@ namespace DBProject
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
-            
+            openChildForm(new Home(), sender);   // open Home form by default
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -78,6 +78,11 @@ namespace DBProject
         private void button6_Click(object sender, EventArgs e)
         {
             openChildForm(new EvaluateResult(), sender);
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            openChildForm(new Home(), sender);
         }
     }
 }
