@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Media;
 
 namespace DBProject
 {
@@ -19,10 +20,16 @@ namespace DBProject
             this.StartPosition = FormStartPosition.CenterScreen;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+
+        private void Uet_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
         {
             string pass = textBox1.Text;
-            if (pass == "admin") 
+            if (pass == "admin")
             {
                 this.Hide();
                 Dashboard f = new Dashboard();
@@ -30,12 +37,13 @@ namespace DBProject
             }
             else
             {
-                MessageBox.Show("Invalid Password");
+                MessageBox.Show("Invalid Password", "Authentication Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);   
             }
         }
 
-        private void Uet_Load(object sender, EventArgs e)
+        private void panel1_Paint(object sender, PaintEventArgs e)
         {
+
         }
     }
 }
