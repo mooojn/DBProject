@@ -42,19 +42,21 @@ namespace DBProject.Main
         private int getRubricLevelInteger()
         {
             int level = -1;
-            if (RubricLevelComboBox.Text == "Unsatisfactory")
+            string text = RubricLevelComboBox.Text;
+            
+            if (text == "Unsatisfactory")
             {
                 level = 1;
             }
-            else if (RubricLevelComboBox.Text == "Fair")
+            else if (text == "Fair")
             {
                 level = 2;
             }
-            else if (RubricLevelComboBox.Text == "Good")
+            else if (text == "Good")
             {
                 level = 3;
             }
-            else if (RubricLevelComboBox.Text == "Exceptional")
+            else if (text == "Exceptional")
             {
                 level = 4;
             }
