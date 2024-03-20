@@ -20,23 +20,37 @@ namespace DBProject
 
         private void Students_Load(object sender, EventArgs e)
         {
-            loadData();   
+            StdDL.LoadData(dataGridView1, "Student");
+            hide_UD_Btns();
         }
-        private void loadData()
+        private void show_UD_Btns() 
         {
-            Program.connection.Open();
-            string query = "SELECT * FROM Student";
-            SqlDataAdapter sda = new SqlDataAdapter(query, Program.connection);
-            DataTable dt = new DataTable();
-            sda.Fill(dt);
-            dataGridView1.DataSource = dt;
-            Program.connection.Close();
+            // A btn
+            addBtn.Hide();
+            // UD btns
+            hideUdBtn.Show();
+            updateBtn.Show();
+            deleteBtn.Show();
+        }
+        private void hide_UD_Btns() 
+        {
+            // A btn
+            addBtn.Show();
+            // UD btns
+            hideUdBtn.Hide();
+            updateBtn.Hide();
+            deleteBtn.Hide();
         }
 
         
 
-        private void button6_Click(object sender, EventArgs e)
+        private void Add_Student(object sender, EventArgs e)
         {
+            if (TextBoxHasNull())
+            {
+                MessageBox.Show("Please fill all the fields", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             Program.connection.Open();
 
             string query = "INSERT INTO Student VALUES (@f_Name, @L_Name, @Contact, @Email, @RegNo, 1)";
@@ -44,39 +58,35 @@ namespace DBProject
             SqlCommand cmd = new SqlCommand(query, Program.connection);
 
             cmd.Parameters.AddWithValue("@f_Name", stdFirstNameBox.Text);
-            cmd.Parameters.AddWithValue("@L_Name", stdContactBox.Text);
-            cmd.Parameters.AddWithValue("@Contact", stdLastNameBox.Text);
+            cmd.Parameters.AddWithValue("@L_Name", stdLastNameBox.Text);
+            cmd.Parameters.AddWithValue("@Contact", stdContactBox.Text);
             cmd.Parameters.AddWithValue("@Email", stdEmailBox.Text);
             cmd.Parameters.AddWithValue("@RegNo", stdRegNoBox.Text);
 
             cmd.ExecuteNonQuery();
 
             Program.connection.Close();
-            //MessageBox.Show("Data has been inserted");
-            loadData();
+            StdDL.LoadData(dataGridView1, "Student");
         }
 
-        private void button4_Click_1(object sender, EventArgs e)
-        {
+
         
-        }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void Data_Table_Click(object sender, DataGridViewCellEventArgs e)
         {
+            var row = dataGridView1.SelectedRows[0];
+            
+            stdFirstNameBox.Text = row.Cells[1].Value.ToString();
+            stdLastNameBox.Text = row.Cells[2].Value.ToString();
+            stdContactBox.Text = row.Cells[3].Value.ToString();
+            stdEmailBox.Text = row.Cells[4].Value.ToString();    
+            stdRegNoBox.Text = row.Cells[5].Value.ToString();
 
+            StdDL.LoadData(dataGridView1, "Student");
+            show_UD_Btns();
         }
 
-        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-            var row = dataGridView1.SelectedRows[0].DataBoundItem;
-            stdFirstNameBox.Text = ((DataRowView)row).Row.ItemArray[1].ToString();
-            stdContactBox.Text = ((DataRowView)row).Row.ItemArray[2].ToString();
-            stdLastNameBox.Text = ((DataRowView)row).Row.ItemArray[3].ToString();
-            stdEmailBox.Text = ((DataRowView)row).Row.ItemArray[4].ToString();
-            stdRegNoBox.Text = ((DataRowView)row).Row.ItemArray[5].ToString();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void Update_Student(object sender, EventArgs e)
         {
             Program.connection.Open();
 
@@ -99,25 +109,17 @@ namespace DBProject
             cmd.ExecuteNonQuery();
             
             Program.connection.Close();
-            loadData();
+            StdDL.LoadData(dataGridView1, "Student");
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Delete_Student(object sender, EventArgs e)
         {
-            Program.connection.Open();
-
             int id = getId();
-    
-            string query = $"DELETE FROM Student WHERE Id = {id}";
 
+            StdDL.DeleteFromTable("Student", "Id" ,id);
+            StdDL.DeleteFromTable("StudentAttendance", "StudentId" ,id);
 
-            SqlCommand cmd = new SqlCommand(query, Program.connection);
-
-            
-            cmd.ExecuteNonQuery();
-
-            Program.connection.Close();
-            loadData();
+            StdDL.LoadData(dataGridView1, "Student");
         }
         private int getId()
         {
@@ -125,10 +127,36 @@ namespace DBProject
             return Convert.ToInt32(((DataRowView)row).Row.ItemArray[0]);
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void Mark_Attendance(object sender, EventArgs e)
         {
             Form form = new Attendance();
             form.Show();
+
+        }
+
+        private void hideUdBtn_Click(object sender, EventArgs e)
+        {
+            hide_UD_Btns();
+        }
+
+        private void addStudentPanel_Paint(object sender, PaintEventArgs e)
+        {
+            
+        }
+        // if any of the textboxes are empty, return true
+        private bool TextBoxHasNull()
+        {
+            if (string.IsNullOrEmpty(stdFirstNameBox.Text) || string.IsNullOrEmpty(stdLastNameBox.Text) 
+                || string.IsNullOrEmpty(stdContactBox.Text) 
+                ||string.IsNullOrEmpty(stdEmailBox.Text) || string.IsNullOrEmpty(stdRegNoBox.Text)) 
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
     }
