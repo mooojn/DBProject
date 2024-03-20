@@ -21,6 +21,17 @@ namespace DBProject
         private void EvaluateResult_Load(object sender, EventArgs e)
         {
             loadData();
+            
+            loadComboBox(StudentComboBox, "FirstName", "Student");
+
+            loadComboBox(AssessmentComboBox, "Title", "Assessment");
+            loadComboBox(ComponentComboBox, "Name", "AssessmentComponent");
+
+            loadComboBox(RubricLevel_IdComboBox, "Id", "RubricLevel");
+            loadComboBox(RubricLevelComboBox, "MeasurementLevel", "RubricLevel");
+            
+            loadComboBox(RubricDetailComboBox, "Details", "Rubric");
+
         }
         private void loadData()
         {
@@ -34,6 +45,20 @@ namespace DBProject
             dataGridView1.DataSource = dt;
             Program.connection.Close();
 
+        }
+        private void loadComboBox(ComboBox ComboBoxToUse, string value, string table)
+        {
+            ComboBoxToUse.Items.Clear();
+            Program.connection.Open();
+            string query = $"SELECT {value} FROM {table}";
+            SqlCommand command = new SqlCommand(query, Program.connection);
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                ComboBoxToUse.Items.Add(reader[0]);
+                
+            }
+            Program.connection.Close();
         }
 
         private void button1_Click(object sender, EventArgs e)
