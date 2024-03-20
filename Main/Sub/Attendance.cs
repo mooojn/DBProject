@@ -62,7 +62,7 @@ namespace DBProject
             insertIntoclassAttendance();
             int id = getId();
             int status = getStatus();
-            MessageBox.Show(id.ToString() + status.ToString());
+            //MessageBox.Show(id.ToString() + status.ToString());
            
             Program.connection.Open();
             string query = "INSERT INTO StudentAttendance VALUES (@id, @StdId, @AttendanceStatus)";
