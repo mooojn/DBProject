@@ -63,19 +63,21 @@ namespace DBProject
 
         private void button1_Click(object sender, EventArgs e)
         {
+            int stdId = QueryDL.GetIdFromTableUsingString("Id", "Student", "FirstName", StudentComboBox.Text);
+            int assessmentId = QueryDL.GetIdFromTableUsingString("Id", "AssessmentComponent", "Name", ComponentComboBox.Text);
+            int rubricId = QueryDL.GetIdFromTableUsingString("Id", "RubricLevel", "MeasurementLevel", RubricLevelComboBox.Text);
+
             Program.connection.Open();
-            string query = "INSERT INTO StudentResult VALUES" +
-                "(@StudentId, @AssessmentComponentId, @RubricMeasurementId, @EvaluationDate)";
+            string query = "INSERT INTO StudentResult VALUES (@StudentId, @AssessmentComponentId, @RubricMeasurementId, @EvaluationDate)";
             SqlCommand command = new SqlCommand(query, Program.connection);
 
-
-            //command.Parameters.AddWithValue("@StudentId", StudentIdComboBox.Text);
-            //command.Parameters.AddWithValue("@AssessmentComponentId", AssessmentComponentIdComboBox.Text);
-            //command.Parameters.AddWithValue("@RubricMeasurementId", RubricMeasurementIdComboBox.Text);
-            
-            
+            command.Parameters.AddWithValue("@StudentId", stdId);
+            command.Parameters.AddWithValue("@AssessmentComponentId", assessmentId);
+            command.Parameters.AddWithValue("@RubricMeasurementId", rubricId);
             command.Parameters.AddWithValue("@EvaluationDate", dateTimePicker1.Value);
+            
             command.ExecuteNonQuery();
+
             Program.connection.Close();
 
             loadData();
