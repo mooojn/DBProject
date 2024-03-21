@@ -46,7 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Functions\MsgDL.cs" />
     <Compile Include="Functions\MainDL.cs" />
+    <Compile Include="Functions\QueryDL.cs" />
     <Compile Include="LoginPage.cs">
       <SubType>Form</SubType>
     </Compile>
