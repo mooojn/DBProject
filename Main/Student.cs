@@ -19,7 +19,7 @@ namespace DBProject
         }
         private void Students_Load(object sender, EventArgs e)
         {
-            MainDL.LoadDataOnGridTable(dataGridView1, "CLO");
+            MainDL.LoadDataOnGridTable(dataGridView1, "Student");
             hide_UD_Btns();
         }
         private void Data_Table_Click(object sender, DataGridViewCellEventArgs e)
@@ -33,7 +33,7 @@ namespace DBProject
             stdEmailBox.Text = row.Cells[4].Value.ToString();    
             stdRegNoBox.Text = row.Cells[5].Value.ToString();
 
-            MainDL.LoadDataOnGridTable(dataGridView1, "CLO");
+            MainDL.LoadDataOnGridTable(dataGridView1, "Student");
             show_UD_Btns();
         }
         private void Add_Student(object sender, EventArgs e)
@@ -53,7 +53,7 @@ namespace DBProject
 
             Program.connection.Close();
 
-            MainDL.LoadDataOnGridTable(dataGridView1, "CLO");
+            MainDL.LoadDataOnGridTable(dataGridView1, "Student");
         }
         private void Update_Student(object sender, EventArgs e)
         {
@@ -74,7 +74,7 @@ namespace DBProject
             cmd.ExecuteNonQuery();
             
             Program.connection.Close();
-            MainDL.LoadDataOnGridTable(dataGridView1, "CLO");
+            MainDL.LoadDataOnGridTable(dataGridView1, "Student");
         }
         private void Delete_Student(object sender, EventArgs e)
         {
@@ -87,7 +87,7 @@ namespace DBProject
             QueryDL.DeleteFromTable("StudentAttendance", "StudentId" ,id);
             QueryDL.DeleteFromTable("Student", "Id" ,id);
 
-            MainDL.LoadDataOnGridTable(dataGridView1, "CLO");
+            MainDL.LoadDataOnGridTable(dataGridView1, "Student");
         }
         private void getParameters(SqlCommand cmd)
         {
