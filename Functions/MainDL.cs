@@ -11,53 +11,7 @@ namespace DBProject
 {
     internal class MainDL
     {
-        public static int GetIdFromTableUsingString(string valueToGet, string table, string columnName, string value)
-        {
-            int id = -1;
-            Program.connection.Open();
-
-            string query = $"SELECT {valueToGet} FROM {table} WHERE {columnName} = '{value}'";
-            
-            var cmdForId = new SqlCommand(query, Program.connection);
-            var reader = cmdForId.ExecuteReader();
-            
-            while (reader.Read()) {
-                id = reader.GetInt32(0);
-            }
-            Program.connection.Close();
-            return id;
-
-        }
-        public static int GetIdFromTable(string valueToGet, string table)
-        {
-            int id = -1;
-            Program.connection.Open();
-            //int attendanceId = MainDL.GetIdFromTable("MAX(Id)", "ClassAttendace");
-            string query = $"SELECT {valueToGet} FROM {table}";
-
-            SqlCommand cmd = new SqlCommand(query, Program.connection);
-            SqlDataReader reader = cmd.ExecuteReader();
-
-
-            while (reader.Read()) {
-                id = reader.GetInt32(0);
-            }
-            Program.connection.Close();
-
-            return id;
-        }
-        public static void DeleteFromTable(string table, string columnName, int idToDelete)
-        {
-            Program.connection.Open();  
-
-            string query = $"DELETE FROM {table} WHERE {columnName} = {idToDelete}";
-
-            SqlCommand cmd = new SqlCommand(query, Program.connection);
-            cmd.ExecuteNonQuery();
-
-            Program.connection.Close();
-        }
-        public static void LoadData(DataGridView dataGridView, string table)
+        public static void LoadDataOnGridTable(DataGridView dataGridView, string table)
         {
             Program.connection.Open();
 
@@ -69,11 +23,7 @@ namespace DBProject
 
             Program.connection.Close();
         }
-        public static void TextBoxEmptyError()
-        {
-            MessageBox.Show("Please fill all the fields", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-        public static int getId(DataGridView dataGrid)
+        public static int GetIdFromGridTable(DataGridView dataGrid)
         {
             // as id is always the first column
             return Convert.ToInt32(dataGrid.SelectedRows[0].Cells[0].Value);
