@@ -17,48 +17,31 @@ namespace DBProject
         public Clo()
         {
             InitializeComponent();
-            loadData();
+            MainDL.LoadData(dataGridView1, "CLO");
         }
-        private void loadData()
-        {
-            Program.connection.Open();
-            string query = "SELECT * FROM CLO";
-            SqlDataAdapter sda = new SqlDataAdapter(query, Program.connection);
-            DataTable dt = new DataTable();
-            sda.Fill(dt);
-
-            // Converting date+time from dateUpdated coloumn to date only
-            dt.AsEnumerable().ToList().ForEach(row =>
-            {
-                if (row["DateUpdated"] != DBNull.Value)
-                {
-                    row["DateUpdated"] = ((DateTime)row["DateUpdated"]).ToShortDateString();
-                }
-            });
-
-            dataGridView1.DataSource = dt;
-            Program.connection.Close();
-        }
+        
         private void Clos_Load(object sender, EventArgs e)
         {
-            
+            hideUD_Btns();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
-            
-            
+            var row = dataGridView1.SelectedRows[0];
+            textBox1.Text = row.Cells[1].Value.ToString();
+            showUD_Btns();
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        private void Add_Data(object sender, EventArgs e)
         {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
+            if (textBoxIsNull())
+            {
+                MainDL.TextBoxEmptyError();
+                return;
+            }
             Program.connection.Open();
-            string query = "INSERT INTO CLO VALUES (@Name, @DateCreated, @DateCreated)";   // 3rd val for DateUpdated
+            
+            string query = "INSERT INTO CLO VALUES (@Name, @DateCreated, @DateCreated)";   
 
             SqlCommand cmd = new SqlCommand(query, Program.connection);
             cmd.Parameters.AddWithValue("@Name", textBox1.Text);
@@ -66,83 +49,70 @@ namespace DBProject
             cmd.ExecuteNonQuery();
 
             Program.connection.Close();
-            loadData();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
             
+            MainDL.LoadData(dataGridView1, "CLO");
         }
-
-       
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void Update_Data(object sender, EventArgs e)
         {
-            
-        }
-
-
-        
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-            var row = dataGridView1.SelectedRows[0].DataBoundItem;
-            textBox1.Text = ((DataRowView)row).Row.ItemArray[1].ToString();
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
+            if (textBoxIsNull()) {
+                MainDL.TextBoxEmptyError();
+                return;
+            }
             Program.connection.Open();
-            string name = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
 
-
-            string query = "UPDATE CLO SET Name = @NewName," +
-                "DateUpdated = @NewTime WHERE Name = @OldName";
+            string query = "UPDATE CLO SET Name = @NewName, DateUpdated = @NewTime WHERE Id = @Id";
+            int id = MainDL.getId(dataGridView1);
 
             SqlCommand cmd = new SqlCommand(query, Program.connection);
-            cmd.Parameters.AddWithValue("@OldName", name);
+            cmd.Parameters.AddWithValue("@Id", id);
             cmd.Parameters.AddWithValue("@NewName", textBox1.Text);
             cmd.Parameters.AddWithValue("@NewTime", DateTime.Now);
-            int changes = cmd.ExecuteNonQuery();
-
-            if (changes > 0)
-                MessageBox.Show("Data has been updated");
-            else
-                MessageBox.Show("Data not found");
-            Program.connection.Close();
-            loadData();
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
-            Program.connection.Open();
-            string query = "DELETE FROM CLO WHERE Id = @id";
-            SqlCommand cmd = new SqlCommand(query, Program.connection);
-            cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();
-            Program.connection.Close();
-            loadData();
 
+            Program.connection.Close();
+
+            MainDL.LoadData(dataGridView1, "CLO");
         }
+
+        private void Delete_Data(object sender, EventArgs e)
+        {
+            if (textBoxIsNull()) {
+                MainDL.TextBoxEmptyError();
+                return;
+            }
+            int id = MainDL.getId(dataGridView1);
+            
+            MainDL.DeleteFromTable("CLO", "Id", id);
+            
+            MainDL.LoadData(dataGridView1, "CLO");
+        }
+        private bool textBoxIsNull()
+        {
+            if (textBox1.Text == "") {
+                return true;
+            }
+            return false;
+        }
+        private void UD_Btn_Click(object sender, EventArgs e)
+        {
+            hideUD_Btns();
+        }
+        private void hideUD_Btns()
+        {
+            addBtn.Show();
+
+            UD_Btn.Hide();
+            updateBtn.Hide();
+            deleteBtn.Hide();
+        }
+        private void showUD_Btns()
+        {
+            UD_Btn.Show();
+            updateBtn.Show();
+            deleteBtn.Show();
+
+            addBtn.Hide();
+        }
+
     }
 }
