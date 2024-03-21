@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 
 namespace DBProject
 {
@@ -20,53 +21,40 @@ namespace DBProject
 
         private void Attendance_Load(object sender, EventArgs e)
         {
-            loadRegNo();
-            loadStatus();
+            loadRegNoComboBox();
+            loadStatusComboBox();
         }
-        private void loadRegNo() 
-        {
-            RegNoComboBox.Items.Clear();
-            Program.connection.Open();
-            string query = "SELECT * FROM Student";
-            var cmd = new SqlCommand(query, Program.connection);
-            var reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                RegNoComboBox.Items.Add(reader.GetString(5));
-            }
-            Program.connection.Close();
-        }
-        private void loadStatus()
-        {
-            StatusComboBox.Items.Clear();
-            Program.connection.Open();
-            string query2 = "SELECT TOP 4 * FROM Lookup";
-            var cmd2 = new SqlCommand(query2, Program.connection);
-            var reader2 = cmd2.ExecuteReader();
-            while (reader2.Read())
-            {
-                StatusComboBox.Items.Add(reader2.GetString(1));
-            }
-            Program.connection.Close();
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void insertIntoclassAttendance()
         {
             if (textBoxIsNull())
             {
-                MessageBox.Show("Please fill all the fields", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MainDL.TextBoxEmptyError();
+                return;
+            }
+            Program.connection.Open();
+
+            string query = "INSERT INTO ClassAttendance VALUES (@Date)";
+
+            var cmd = new SqlCommand(query, Program.connection);
+            cmd.Parameters.AddWithValue("@Date", DateTime.Now);
+            cmd.ExecuteNonQuery();
+
+            Program.connection.Close();
+        }
+
+        private void Save_Attendance(object sender, EventArgs e)
+        {
+            if (textBoxIsNull()) {
+                MainDL.TextBoxEmptyError();
                 return;
             }
             insertIntoclassAttendance();
-            int stdId = getId();
-            int attendanceId = getAttendanceId();
-            int status = getStatus();
-
+            
+            // getting the ids
+            int stdId = MainDL.GetIdFromTableUsingString("Id", "Student", "RegistrationNumber", RegNoComboBox.Text);
+            int attendanceId = MainDL.GetIdFromTable("MAX(Id)", "ClassAttendace");
+            int status = MainDL.GetIdFromTableUsingString("Lookupid", "Lookup", "Name", StatusComboBox.Text);
+            
             Program.connection.Open();
             string query = "INSERT INTO StudentAttendance VALUES (@id, @StdId, @AttendanceStatus)";
             
@@ -74,91 +62,51 @@ namespace DBProject
             cmd.Parameters.AddWithValue("@id", attendanceId);    /// change id to auto increment
             cmd.Parameters.AddWithValue("@StdId", stdId);
             cmd.Parameters.AddWithValue("@AttendanceStatus", status);
-
             cmd.ExecuteNonQuery();
 
             Program.connection.Close();
+
             MessageBox.Show("Attendance Marked", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
         }
-        private int getAttendanceId()
+        
+        private void loadRegNoComboBox()
         {
-            Program.connection.Open();
-            string query = "SELECT MAX(Id) FROM ClassAttendance";
-            var cmd = new SqlCommand(query, Program.connection);
-            var reader = cmd.ExecuteReader();
-            int id = -1;
-            while (reader.Read())
-            {
-                id = reader.GetInt32(0);
-            }
-            Program.connection.Close();
-            return id;
-        }
-        private void insertIntoclassAttendance()
-        {
-            if (textBoxIsNull())
-            {
-                MessageBox.Show("Please fill all the fields", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            Program.connection.Open();
-            string query = "INSERT INTO ClassAttendance VALUES (@Date)";
-            var cmd = new SqlCommand(query, Program.connection);
-            cmd.Parameters.AddWithValue("@Date", DateTime.Now);
-            cmd.ExecuteNonQuery();
-            Program.connection.Close();
-        }
-        private int getStatus()
-        {
-            Program.connection.Open();
-            string attendance = StatusComboBox.Text;
-            int status = -1;
-
-            string queryForStatus = "SELECT Lookupid FROM Lookup WHERE Name = @Status";
-            var cmdForStatus = new SqlCommand(queryForStatus, Program.connection);
-                
-            cmdForStatus.Parameters.AddWithValue("@Status", attendance);
-            var reader = cmdForStatus.ExecuteReader();
-            while (reader.Read())
-            {
-                status = reader.GetInt32(0);
-            }
-
-            Program.connection.Close();
-            return status;
-        }
-        private int getId()
-        {
-            string regNo = RegNoComboBox.Text;
+            RegNoComboBox.Items.Clear();
 
             Program.connection.Open();
-            int id = -1;
-            
-            string queryForId = "SELECT Id FROM Student WHERE RegistrationNumber = @RegNo";
-            var cmdForId = new SqlCommand(queryForId, Program.connection);
-            cmdForId.Parameters.AddWithValue("@RegNo", regNo);
-            var reader = cmdForId.ExecuteReader();
-            while (reader.Read())
-            {
-                id = reader.GetInt32(0);
-            }
 
+            string query = "SELECT * FROM Student";
+
+            SqlCommand cmd = new SqlCommand(query, Program.connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read()) {
+                RegNoComboBox.Items.Add(reader.GetString(5));
+            }
             Program.connection.Close();
-            return id;
+        }
+        private void loadStatusComboBox()
+        {
+            StatusComboBox.Items.Clear();
+
+            Program.connection.Open();
+
+            string query = "SELECT TOP 4 * FROM Lookup";
+
+            SqlCommand cmd = new SqlCommand(query, Program.connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read()) {
+                StatusComboBox.Items.Add(reader.GetString(1));
+            }
+            Program.connection.Close();
         }
         private bool textBoxIsNull()
         {
-            if (RegNoComboBox.Text == "" || StatusComboBox.Text == "")
-            {
+            if (RegNoComboBox.Text == "" || StatusComboBox.Text == "") {
                 return true;
             }
             return false;
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }
