@@ -15,8 +15,8 @@ namespace DBProject
         {
             int id = -1;
             Program.connection.Open();
-         
-            string query = $"SELECT {valueToGet} FROM {table} WHERE {columnName} = {value}";
+
+            string query = $"SELECT {valueToGet} FROM {table} WHERE {columnName} = '{value}'";
             
             var cmdForId = new SqlCommand(query, Program.connection);
             var reader = cmdForId.ExecuteReader();
@@ -32,7 +32,7 @@ namespace DBProject
         {
             int id = -1;
             Program.connection.Open();
-
+            //int attendanceId = MainDL.GetIdFromTable("MAX(Id)", "ClassAttendace");
             string query = $"SELECT {valueToGet} FROM {table}";
 
             SqlCommand cmd = new SqlCommand(query, Program.connection);

@@ -51,8 +51,8 @@ namespace DBProject
             insertIntoclassAttendance();
             
             // getting the ids
+            int attendanceId = MainDL.GetIdFromTable("MAX(Id)", "ClassAttendance");
             int stdId = MainDL.GetIdFromTableUsingString("Id", "Student", "RegistrationNumber", RegNoComboBox.Text);
-            int attendanceId = MainDL.GetIdFromTable("MAX(Id)", "ClassAttendace");
             int status = MainDL.GetIdFromTableUsingString("Lookupid", "Lookup", "Name", StatusComboBox.Text);
             
             Program.connection.Open();
