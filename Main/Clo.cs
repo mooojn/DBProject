@@ -17,7 +17,7 @@ namespace DBProject
         public Clo()
         {
             InitializeComponent();
-            MainDL.LoadData(dataGridView1, "CLO");
+            MainDL.LoadDataOnGridTable(dataGridView1, "CLO");
         }
         
         private void Clos_Load(object sender, EventArgs e)
@@ -36,7 +36,7 @@ namespace DBProject
         {
             if (textBoxIsNull())
             {
-                MainDL.TextBoxEmptyError();
+                MsgDL.TextBoxEmptyError();
                 return;
             }
             Program.connection.Open();
@@ -49,19 +49,19 @@ namespace DBProject
             cmd.ExecuteNonQuery();
 
             Program.connection.Close();
-            
-            MainDL.LoadData(dataGridView1, "CLO");
+
+            MainDL.LoadDataOnGridTable(dataGridView1, "CLO");
         }
         private void Update_Data(object sender, EventArgs e)
         {
             if (textBoxIsNull()) {
-                MainDL.TextBoxEmptyError();
+                MsgDL.TextBoxEmptyError();
                 return;
             }
             Program.connection.Open();
 
             string query = "UPDATE CLO SET Name = @NewName, DateUpdated = @NewTime WHERE Id = @Id";
-            int id = MainDL.getId(dataGridView1);
+            int id = MainDL.GetIdFromGridTable(dataGridView1);
 
             SqlCommand cmd = new SqlCommand(query, Program.connection);
             cmd.Parameters.AddWithValue("@Id", id);
@@ -71,20 +71,20 @@ namespace DBProject
 
             Program.connection.Close();
 
-            MainDL.LoadData(dataGridView1, "CLO");
+            MainDL.LoadDataOnGridTable(dataGridView1, "CLO");
         }
 
         private void Delete_Data(object sender, EventArgs e)
         {
             if (textBoxIsNull()) {
-                MainDL.TextBoxEmptyError();
+                MsgDL.TextBoxEmptyError();
                 return;
             }
-            int id = MainDL.getId(dataGridView1);
+            int id = MainDL.GetIdFromGridTable(dataGridView1);
             
-            MainDL.DeleteFromTable("CLO", "Id", id);
+            QueryDL.DeleteFromTable("CLO", "Id", id);
             
-            MainDL.LoadData(dataGridView1, "CLO");
+            MainDL.LoadDataOnGridTable(dataGridView1, "CLO");
         }
         private bool textBoxIsNull()
         {

@@ -19,7 +19,7 @@ namespace DBProject
         }
         private void Students_Load(object sender, EventArgs e)
         {
-            MainDL.LoadData(dataGridView1, "Student");
+            MainDL.LoadDataOnGridTable(dataGridView1, "CLO");
             hide_UD_Btns();
         }
         private void Data_Table_Click(object sender, DataGridViewCellEventArgs e)
@@ -33,13 +33,13 @@ namespace DBProject
             stdEmailBox.Text = row.Cells[4].Value.ToString();    
             stdRegNoBox.Text = row.Cells[5].Value.ToString();
 
-            MainDL.LoadData(dataGridView1, "Student");
+            MainDL.LoadDataOnGridTable(dataGridView1, "CLO");
             show_UD_Btns();
         }
         private void Add_Student(object sender, EventArgs e)
         {
             if (TextBoxHasNull()) {
-                MainDL.TextBoxEmptyError();
+                MsgDL.TextBoxEmptyError();
                 return;
             }
             Program.connection.Open();
@@ -53,17 +53,17 @@ namespace DBProject
 
             Program.connection.Close();
 
-            MainDL.LoadData(dataGridView1, "Student");
+            MainDL.LoadDataOnGridTable(dataGridView1, "CLO");
         }
         private void Update_Student(object sender, EventArgs e)
         {
             if (TextBoxHasNull()) {
-                MainDL.TextBoxEmptyError();
+                MsgDL.TextBoxEmptyError();
                 return;
             }
             Program.connection.Open();
 
-            int id = MainDL.getId(dataGridView1);
+            int id = MainDL.GetIdFromGridTable(dataGridView1);
 
             string query = "UPDATE Student SET FirstName = @F_Name, LastName = @L_Name, Contact = @Contact, Email = @Email, RegistrationNumber = @RegNo WHERE Id = @id";
             
@@ -74,20 +74,20 @@ namespace DBProject
             cmd.ExecuteNonQuery();
             
             Program.connection.Close();
-            MainDL.LoadData(dataGridView1, "Student");
+            MainDL.LoadDataOnGridTable(dataGridView1, "CLO");
         }
         private void Delete_Student(object sender, EventArgs e)
         {
             if (TextBoxHasNull()) {
-                MainDL.TextBoxEmptyError();
+                MsgDL.TextBoxEmptyError();
                 return;
             }
-            int id = MainDL.getId(dataGridView1);
+            int id = MainDL.GetIdFromGridTable(dataGridView1);
 
-            MainDL.DeleteFromTable("StudentAttendance", "StudentId" ,id);
-            MainDL.DeleteFromTable("Student", "Id" ,id);
+            QueryDL.DeleteFromTable("StudentAttendance", "StudentId" ,id);
+            QueryDL.DeleteFromTable("Student", "Id" ,id);
 
-            MainDL.LoadData(dataGridView1, "Student");
+            MainDL.LoadDataOnGridTable(dataGridView1, "CLO");
         }
         private void getParameters(SqlCommand cmd)
         {

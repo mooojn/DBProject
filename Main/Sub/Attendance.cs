@@ -28,7 +28,7 @@ namespace DBProject
         {
             if (textBoxIsNull())
             {
-                MainDL.TextBoxEmptyError();
+                MsgDL.TextBoxEmptyError();
                 return;
             }
             Program.connection.Open();
@@ -45,15 +45,15 @@ namespace DBProject
         private void Save_Attendance(object sender, EventArgs e)
         {
             if (textBoxIsNull()) {
-                MainDL.TextBoxEmptyError();
+                MsgDL.TextBoxEmptyError();
                 return;
             }
             insertIntoclassAttendance();
             
             // getting the ids
-            int attendanceId = MainDL.GetIdFromTable("MAX(Id)", "ClassAttendance");
-            int stdId = MainDL.GetIdFromTableUsingString("Id", "Student", "RegistrationNumber", RegNoComboBox.Text);
-            int status = MainDL.GetIdFromTableUsingString("Lookupid", "Lookup", "Name", StatusComboBox.Text);
+            int attendanceId = QueryDL.GetIdFromTable("MAX(Id)", "ClassAttendance");
+            int stdId = QueryDL.GetIdFromTableUsingString("Id", "Student", "RegistrationNumber", RegNoComboBox.Text);
+            int status = QueryDL.GetIdFromTableUsingString("Lookupid", "Lookup", "Name", StatusComboBox.Text);
             
             Program.connection.Open();
             string query = "INSERT INTO StudentAttendance VALUES (@id, @StdId, @AttendanceStatus)";
