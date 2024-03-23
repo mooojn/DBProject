@@ -117,7 +117,7 @@ namespace DBProject
             Program.connection.Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Add_Data(object sender, EventArgs e)
         {
             int stdId = QueryDL.GetIdFromTableUsingString("Id", "Student", "FirstName", StudentComboBox.Text);
             int assessmentId = QueryDL.GetIdFromTableUsingString("Id", "AssessmentComponent", "Name", ComponentComboBox.Text);
@@ -167,6 +167,11 @@ namespace DBProject
             
             string subQuery = $"RubricId = (SELECT Id FROM Rubric WHERE Details = '{RubricDetailComboBox.Text}')";
             loadComboBoxWhere(RubricLevelComboBox, "MeasurementLevel", "RubricLevel", subQuery);
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
