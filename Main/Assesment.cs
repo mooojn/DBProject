@@ -23,7 +23,7 @@ namespace DBProject
             loadData();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Add_Data(object sender, EventArgs e)
         {
             Program.connection.Open();
             string query = "INSERT INTO Assessment values" +
@@ -39,7 +39,7 @@ namespace DBProject
             loadData();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Update_Data(object sender, EventArgs e)
         {
             DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
             int id = Convert.ToInt32(selectedRow.Cells[0].Value);   
@@ -62,7 +62,7 @@ namespace DBProject
 
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void Cell_Click(object sender, DataGridViewCellEventArgs e)
         {
             var row = dataGridView1.SelectedRows[0];
             textBox1.Text = row.Cells[1].Value.ToString();
@@ -80,7 +80,7 @@ namespace DBProject
             Program.connection.Close();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void Delete_Data(object sender, EventArgs e)
         {
             int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
             Program.connection.Open();
@@ -93,9 +93,10 @@ namespace DBProject
 
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void Open_Componenet_Form(object sender, EventArgs e)
         {
             AssesmentComponent form = new AssesmentComponent();
+            form.StartPosition = FormStartPosition.CenterScreen;
             form.Show();
         }
     }
