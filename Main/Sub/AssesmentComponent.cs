@@ -70,7 +70,7 @@ namespace DBProject
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Add_Data(object sender, EventArgs e)
         {
             int assessmentId = getAssessmentId();
             int rubricId = getRubricId();
@@ -124,7 +124,7 @@ namespace DBProject
 
             return id;
         }
-        private void button2_Click(object sender, EventArgs e)
+        private void Update_Data(object sender, EventArgs e)
         {
             int assessmentId = getAssessmentId();
             int rubricId = getRubricId();
@@ -147,14 +147,14 @@ namespace DBProject
 
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void Cell_Click(object sender, DataGridViewCellEventArgs e)
         {
             var rows = dataGridView1.SelectedRows[0];
             textBox1.Text = rows.Cells[1].Value.ToString();
             textBox2.Text = rows.Cells[3].Value.ToString();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void Delete_Data(object sender, EventArgs e)
         {
             Program.connection.Open();
             string query = "DELETE FROM AssessmentComponent WHERE Id = @Id";
@@ -165,6 +165,26 @@ namespace DBProject
             cmd.ExecuteNonQuery();
             Program.connection.Close();
             loadData();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
