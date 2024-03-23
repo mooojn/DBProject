@@ -36,8 +36,6 @@
             this.ComponentComboBox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.RubricLevelComboBox = new System.Windows.Forms.ComboBox();
-            this.RubricLevel_IdComboBox = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.RubricDetailComboBox = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.AssessmentComboBox = new System.Windows.Forms.ComboBox();
@@ -63,6 +61,7 @@
             this.StudentComboBox.Name = "StudentComboBox";
             this.StudentComboBox.Size = new System.Drawing.Size(209, 33);
             this.StudentComboBox.TabIndex = 32;
+            this.StudentComboBox.SelectedIndexChanged += new System.EventHandler(this.StudentComboBox_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -102,11 +101,12 @@
             this.ComponentComboBox.Name = "ComponentComboBox";
             this.ComponentComboBox.Size = new System.Drawing.Size(209, 33);
             this.ComponentComboBox.TabIndex = 34;
+            this.ComponentComboBox.SelectedValueChanged += new System.EventHandler(this.ComponentComboBox_SelectedValueChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(69, 135);
+            this.label3.Location = new System.Drawing.Point(260, 146);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(132, 25);
             this.label3.TabIndex = 35;
@@ -115,27 +115,11 @@
             // RubricLevelComboBox
             // 
             this.RubricLevelComboBox.FormattingEnabled = true;
-            this.RubricLevelComboBox.Location = new System.Drawing.Point(224, 135);
+            this.RubricLevelComboBox.Location = new System.Drawing.Point(415, 146);
             this.RubricLevelComboBox.Name = "RubricLevelComboBox";
             this.RubricLevelComboBox.Size = new System.Drawing.Size(209, 33);
             this.RubricLevelComboBox.TabIndex = 36;
-            // 
-            // RubricLevel_IdComboBox
-            // 
-            this.RubricLevel_IdComboBox.FormattingEnabled = true;
-            this.RubricLevel_IdComboBox.Location = new System.Drawing.Point(635, 138);
-            this.RubricLevel_IdComboBox.Name = "RubricLevel_IdComboBox";
-            this.RubricLevel_IdComboBox.Size = new System.Drawing.Size(209, 33);
-            this.RubricLevel_IdComboBox.TabIndex = 42;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(474, 141);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(155, 25);
-            this.label4.TabIndex = 41;
-            this.label4.Text = "Rubric Level Id";
+            this.RubricLevelComboBox.SelectedValueChanged += new System.EventHandler(this.RubricLevelComboBox_SelectedValueChanged);
             // 
             // RubricDetailComboBox
             // 
@@ -144,6 +128,7 @@
             this.RubricDetailComboBox.Name = "RubricDetailComboBox";
             this.RubricDetailComboBox.Size = new System.Drawing.Size(209, 33);
             this.RubricDetailComboBox.TabIndex = 40;
+            this.RubricDetailComboBox.SelectedValueChanged += new System.EventHandler(this.RubricDetailComboBox_SelectedValueChanged);
             // 
             // label5
             // 
@@ -161,6 +146,7 @@
             this.AssessmentComboBox.Name = "AssessmentComboBox";
             this.AssessmentComboBox.Size = new System.Drawing.Size(209, 33);
             this.AssessmentComboBox.TabIndex = 38;
+            this.AssessmentComboBox.SelectedValueChanged += new System.EventHandler(this.AssessmentComboBox_SelectedValueChanged);
             // 
             // label6
             // 
@@ -194,8 +180,6 @@
             this.ClientSize = new System.Drawing.Size(875, 528);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.RubricLevel_IdComboBox);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.RubricDetailComboBox);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.AssessmentComboBox);
@@ -227,8 +211,6 @@
         private System.Windows.Forms.ComboBox ComponentComboBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox RubricLevelComboBox;
-        private System.Windows.Forms.ComboBox RubricLevel_IdComboBox;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox RubricDetailComboBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox AssessmentComboBox;
