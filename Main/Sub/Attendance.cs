@@ -35,8 +35,8 @@ namespace DBProject
 
             string query = "INSERT INTO ClassAttendance VALUES (@Date)";
 
-            var cmd = new SqlCommand(query, Program.connection);
-            cmd.Parameters.AddWithValue("@Date", DateTime.Now);
+            SqlCommand cmd = new SqlCommand(query, Program.connection);
+            cmd.Parameters.AddWithValue("@Date", datePicker.Value);
             cmd.ExecuteNonQuery();
 
             Program.connection.Close();
@@ -58,7 +58,7 @@ namespace DBProject
             Program.connection.Open();
             string query = "INSERT INTO StudentAttendance VALUES (@id, @StdId, @AttendanceStatus)";
             
-            var cmd = new SqlCommand(query, Program.connection);
+            SqlCommand cmd = new SqlCommand(query, Program.connection);
             cmd.Parameters.AddWithValue("@id", attendanceId);    /// change id to auto increment
             cmd.Parameters.AddWithValue("@StdId", stdId);
             cmd.Parameters.AddWithValue("@AttendanceStatus", status);
@@ -71,17 +71,15 @@ namespace DBProject
         
         private void loadRegNoComboBox()
         {
-            RegNoComboBox.Items.Clear();
-
             Program.connection.Open();
 
-            string query = "SELECT * FROM Student";
+            string query = "SELECT RegistrationNumber FROM Student";
 
             SqlCommand cmd = new SqlCommand(query, Program.connection);
             SqlDataReader reader = cmd.ExecuteReader();
 
             while (reader.Read()) {
-                RegNoComboBox.Items.Add(reader.GetString(5));
+                RegNoComboBox.Items.Add(reader["RegistrationNumber"]);
             }
             Program.connection.Close();
         }
@@ -107,6 +105,11 @@ namespace DBProject
                 return true;
             }
             return false;
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

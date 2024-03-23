@@ -33,7 +33,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.StatusComboBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.datePicker = new System.Windows.Forms.DateTimePicker();
             this.Date = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.RegNoComboBox = new System.Windows.Forms.ComboBox();
@@ -47,7 +47,7 @@
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(91)))), ((int)(((byte)(100)))));
             this.panel1.Controls.Add(this.StatusComboBox);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.dateTimePicker1);
+            this.panel1.Controls.Add(this.datePicker);
             this.panel1.Controls.Add(this.Date);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.RegNoComboBox);
@@ -56,6 +56,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(687, 350);
             this.panel1.TabIndex = 7;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // StatusComboBox
             // 
@@ -76,12 +77,12 @@
             this.label2.TabIndex = 12;
             this.label2.Text = "Status";
             // 
-            // dateTimePicker1
+            // datePicker
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(223, 158);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(386, 31);
-            this.dateTimePicker1.TabIndex = 11;
+            this.datePicker.Location = new System.Drawing.Point(223, 158);
+            this.datePicker.Name = "datePicker";
+            this.datePicker.Size = new System.Drawing.Size(386, 31);
+            this.datePicker.TabIndex = 11;
             // 
             // Date
             // 
@@ -146,7 +147,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox StatusComboBox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker datePicker;
         private System.Windows.Forms.Label Date;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox RegNoComboBox;
