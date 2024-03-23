@@ -36,7 +36,7 @@ namespace DBProject
             }
             Program.connection.Close();
         }
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void Cell_Click(object sender, DataGridViewCellEventArgs e)
         {
             
             
@@ -49,7 +49,7 @@ namespace DBProject
             
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Insert_Data(object sender, EventArgs e)
         {
             int id = getId();
 
@@ -91,7 +91,7 @@ namespace DBProject
             Program.connection.Close();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Update_Data(object sender, EventArgs e)
         {
             Program.connection.Open();
             int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
@@ -109,7 +109,7 @@ namespace DBProject
             loadData();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void Delete_Data(object sender, EventArgs e)
         {
             int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
             Program.connection.Open();

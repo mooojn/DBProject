@@ -24,7 +24,7 @@ namespace DBProject.Main
             loadRubricId();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Add_Data(object sender, EventArgs e)
         {
             Program.connection.Open();
             string query = "INSERT INTO RubricLevel VALUES (@RubricId, @Details, @MeasurementLevel)";
@@ -85,7 +85,7 @@ namespace DBProject.Main
                 Program.connection.Close();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void Cell_Click(object sender, DataGridViewCellEventArgs e)
         {
             var row = dataGridView1.SelectedRows[0];
             RubricIdComboBox.Text = row.Cells[1].Value.ToString();
@@ -93,7 +93,7 @@ namespace DBProject.Main
             RubricLevelComboBox.Text = row.Cells[3].Value.ToString();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Update_Data(object sender, EventArgs e)
         {
             int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
             Program.connection.Open();
@@ -114,7 +114,7 @@ namespace DBProject.Main
             loadData();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void Delete_Data(object sender, EventArgs e)
         {
             int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
             Program.connection.Open();
