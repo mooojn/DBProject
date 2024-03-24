@@ -28,13 +28,15 @@ namespace DBProject
             openChildForm(new Home(), sender);   // open Home form by default
         }
         private void button1_Click(object sender, EventArgs e)
-        { 
-            openChildForm(new Student(), sender);
+        {
+            if (activeForm.Text != "")
+                openChildForm(new Student(), sender);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            openChildForm(new Clo(), sender);
+            if (activeForm.Text != "Clos")
+                openChildForm(new Clo(), sender);
         }
         private void openChildForm(Form child, object sender)
         {
@@ -62,27 +64,32 @@ namespace DBProject
 
         private void button4_Click(object sender, EventArgs e)
         {
-            openChildForm(new Assesment(), sender);
+            if (activeForm.Text != "Assesment")
+                openChildForm(new Assesment(), sender);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            openChildForm(new Rubric(), sender);
+            if (activeForm.Text != "Rubrics")
+                openChildForm(new Rubric(), sender);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            openChildForm(new RubricLevel(), sender);
+            if (activeForm.Text != "RubricLevel")
+                openChildForm(new RubricLevel(), sender);
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            openChildForm(new EvaluateResult(), sender);
+            if (activeForm.Text != "EvaluateResult")
+                openChildForm(new EvaluateResult(), sender);
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            openChildForm(new Home(), sender);
+            if (activeForm.Text != "Home")
+                openChildForm(new Home(), sender);
         }
     }
 }
