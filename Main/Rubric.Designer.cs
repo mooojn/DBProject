@@ -64,9 +64,9 @@
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(246)))), ((int)(((byte)(242)))));
             this.label1.Location = new System.Drawing.Point(101, 86);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 25);
+            this.label1.Size = new System.Drawing.Size(55, 25);
             this.label1.TabIndex = 33;
-            this.label1.Text = "CLO Id";
+            this.label1.Text = "CLO";
             // 
             // Clo_IDComboBox
             // 

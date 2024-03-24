@@ -27,7 +27,7 @@ namespace DBProject
         {
             Clo_IDComboBox.Items.Clear();
             Program.connection.Open();
-            string query = "SELECT Id FROM Clo";
+            string query = "SELECT Name FROM Clo";
             SqlCommand command = new SqlCommand(query, Program.connection);
             SqlDataReader data = command.ExecuteReader();
             while (data.Read())
@@ -51,13 +51,12 @@ namespace DBProject
 
         private void Insert_Data(object sender, EventArgs e)
         {
-            int id = getId();
+            //int id = getId();
 
             Program.connection.Open();
-            string query = "INSERT INTO Rubric values" +
-                "(@Id, @Details, @CloId)";
+            string query = "INSERT INTO Rubric values (@Details, (SELECT Id FROM Clo WHERE Name = @CloId))";
             SqlCommand command = new SqlCommand(query, Program.connection);
-            command.Parameters.AddWithValue("@Id", id);
+            //command.Parameters.AddWithValue("@Id", id);
             command.Parameters.AddWithValue("@Details", textBox1.Text);
             command.Parameters.AddWithValue("@CloId", Clo_IDComboBox.Text);
             command.ExecuteNonQuery();
