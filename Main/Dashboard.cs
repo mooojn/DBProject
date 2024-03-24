@@ -28,7 +28,7 @@ namespace DBProject
             openChildForm(new Home(), sender);   // open Home form by default
         }
         private void button1_Click(object sender, EventArgs e)
-        {
+        { 
             openChildForm(new Student(), sender);
         }
 
@@ -41,7 +41,7 @@ namespace DBProject
             if (activeForm != null)
             {
                 activeForm.Close();
-            }
+            } 
             activeForm = child;
             
             child.TopLevel = false;

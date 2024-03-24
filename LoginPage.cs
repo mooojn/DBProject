@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Media;
+using DBProject.Main;
 
 namespace DBProject
 {
@@ -16,18 +17,18 @@ namespace DBProject
     {
         public Uet()
         {
-            InitializeComponent();
+            InitializeComponent();   
             this.StartPosition = FormStartPosition.CenterScreen;
         }
 
 
         private void Uet_Load(object sender, EventArgs e)
-        {
-            
+        { 
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+            
             string pass = textBox1.Text;
             if (pass == "admin")
             {

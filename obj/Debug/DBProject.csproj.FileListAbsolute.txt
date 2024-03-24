@@ -29,3 +29,7 @@ C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.AssesmentComponent.resources
 C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.Rubric.resources
 C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.EvaluateResult.resources
 C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.Main.Home.resources
+C:\Users\moon\Desktop\DBProject\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\moon\Desktop\DBProject\bin\Debug\itextsharp.dll
+C:\Users\moon\Desktop\DBProject\bin\Debug\itextsharp.xml
+C:\Users\moon\Desktop\DBProject\obj\Debug\DBProject.csproj.CopyComplete
