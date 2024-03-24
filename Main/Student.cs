@@ -136,10 +136,6 @@ namespace DBProject
             form.StartPosition = FormStartPosition.CenterScreen;
             form.Show();
         }
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
         private void addStudentPanel_Paint(object sender, PaintEventArgs e)
         {
             

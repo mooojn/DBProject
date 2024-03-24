@@ -30,7 +30,6 @@
         {
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.addStudentPanel = new System.Windows.Forms.Panel();
             this.hideUdBtn = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -47,15 +46,15 @@
             this.stdLastNameBox = new System.Windows.Forms.TextBox();
             this.stdFirstNameBox = new System.Windows.Forms.TextBox();
             this.addBtn = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.addStudentPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.panel1.Controls.Add(this.dataGridView1);
             this.panel1.Controls.Add(this.addStudentPanel);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -63,25 +62,10 @@
             this.panel1.Size = new System.Drawing.Size(1417, 855);
             this.panel1.TabIndex = 0;
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 508);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.RowHeadersWidth = 82;
-            this.dataGridView1.RowTemplate.Height = 33;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1417, 333);
-            this.dataGridView1.TabIndex = 33;
-            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Data_Table_Click);
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
             // addStudentPanel
             // 
             this.addStudentPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(91)))), ((int)(((byte)(100)))));
+            this.addStudentPanel.Controls.Add(this.dataGridView1);
             this.addStudentPanel.Controls.Add(this.hideUdBtn);
             this.addStudentPanel.Controls.Add(this.label3);
             this.addStudentPanel.Controls.Add(this.stdContactBox);
@@ -249,6 +233,20 @@
             this.addBtn.UseVisualStyleBackColor = false;
             this.addBtn.Click += new System.EventHandler(this.Add_Student);
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 496);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.RowHeadersWidth = 82;
+            this.dataGridView1.RowTemplate.Height = 33;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(1416, 358);
+            this.dataGridView1.TabIndex = 27;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Data_Table_Click);
+            // 
             // Student
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -259,9 +257,9 @@
             this.Name = "Student";
             this.Load += new System.EventHandler(this.Students_Load);
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.addStudentPanel.ResumeLayout(false);
             this.addStudentPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -269,7 +267,6 @@
         #endregion
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Panel addStudentPanel;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button deleteBtn;
@@ -286,5 +283,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox stdContactBox;
         private System.Windows.Forms.Button hideUdBtn;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
