@@ -23,142 +23,12 @@ namespace DBProject
 
         private void AssesmentComponent_Load(object sender, EventArgs e)
         {
-            loadData();
-            loadAssessmentData();
-            loadRubricData();
+            MainDL.LoadDataOnGridTable(dataGridView1, "AssessmentComponent");
             UtilDL.hideUD_Btns(addBtn, updateBtn, deleteBtn, udBtn);
-        }
-        private void loadRubricData()
-        {
-            RubricNameComboBox.Items.Clear();
-            Program.connection.Open();
-            string query = "SELECT Details FROM Rubric";
-            SqlCommand cmd = new SqlCommand(query, Program.connection);
-            SqlDataReader data = cmd.ExecuteReader();
-            while (data.Read())
-            {
-                RubricNameComboBox.Items.Add(data.GetString(0));
-            }
-            Program.connection.Close();
-        }
-        private void loadAssessmentData()
-        {
-            AssessmentNameComboBox.Items.Clear();
-            Program.connection.Open();
-            string query = "SELECT Title FROM Assessment";
-            SqlCommand cmd = new SqlCommand(query, Program.connection);
-            SqlDataReader data = cmd.ExecuteReader();
-            while (data.Read())
-            {
-                AssessmentNameComboBox.Items.Add(data.GetString(0));
-            }
-            Program.connection.Close();
-        }
-        private void loadData()
-        {
-            Program.connection.Open();
-            string query = "SELECT * FROM AssessmentComponent";
-                
-            SqlDataAdapter SDA = new SqlDataAdapter(query, Program.connection);
-                
-            DataTable data = new DataTable();
-            SDA.Fill(data);
-            dataGridView1.DataSource = data;
-            Program.connection.Close();
-        }
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            QueryDL.LoadComboBox(AssessmentNameComboBox, "Title", "Assessment");
+            QueryDL.LoadComboBox(RubricNameComboBox, "Details", "Rubric");
         }
-
-        private void Add_Data(object sender, EventArgs e)
-        {
-            if (BoxIsNull())
-            {
-                MsgDL.TextBoxEmptyError();
-                return;
-            }
-            int assessmentId = getAssessmentId();
-            int rubricId = getRubricId();
-
-            Program.connection.Open();
-            string query = "INSERT INTO AssessmentComponent VALUES " +
-                "(@Name, @RubricId, @TotalMarks, @DateCreated, @DateUpdated, @AssessmentId)";
-            
-            SqlCommand cmd = new SqlCommand(query, Program.connection);
-            
-            cmd.Parameters.AddWithValue("@Name", textBox1.Text);
-            cmd.Parameters.AddWithValue("@RubricId", rubricId);
-            cmd.Parameters.AddWithValue("@TotalMarks", textBox2.Text);
-            cmd.Parameters.AddWithValue("@DateCreated", DateTime.Now);
-            cmd.Parameters.AddWithValue("@DateUpdated", DateTime.Now);
-            cmd.Parameters.AddWithValue("@AssessmentId", assessmentId);
-            cmd.ExecuteNonQuery();
-            
-            Program.connection.Close();
-            loadData();
-        }
-        private int getAssessmentId()
-        {
-            int id = -1;
-            Program.connection.Open();
-            string query = "SELECT Id FROM Assessment WHERE Title = @Title";
-            SqlCommand cmd = new SqlCommand(query, Program.connection);
-            cmd.Parameters.AddWithValue("@Title", AssessmentNameComboBox.Text);
-            SqlDataReader data = cmd.ExecuteReader();
-            while (data.Read())
-            {
-                id = data.GetInt32(0);
-            }
-            Program.connection.Close();
-
-            return id;
-        }
-        private int getRubricId()
-        {
-            int id = -1;
-            Program.connection.Open();
-            string query = "SELECT Id FROM Rubric WHERE Details = @Detail";
-            SqlCommand cmd = new SqlCommand(query, Program.connection);
-            cmd.Parameters.AddWithValue("@Detail", RubricNameComboBox.Text);
-            SqlDataReader data = cmd.ExecuteReader();
-            while (data.Read())
-            {
-                id = data.GetInt32(0);
-            }
-            Program.connection.Close();
-
-            return id;
-        }
-        private void Update_Data(object sender, EventArgs e)
-        {
-            if (BoxIsNull())
-            {
-                MsgDL.TextBoxEmptyError();
-                return;
-            }
-            int assessmentId = getAssessmentId();
-            int rubricId = getRubricId();
-            Program.connection.Open();
-            string query = "UPDATE AssessmentComponent SET " +
-                "Name = @Name, RubricId = @RubricId, TotalMarks = @TotalMarks, " +
-                "DateUpdated = @DateUpdated, AssessmentId = @AssessmentId WHERE Id = @Id";
-            
-            SqlCommand cmd = new SqlCommand(query, Program.connection);
-            cmd.Parameters.AddWithValue("@Name", textBox1.Text);
-            cmd.Parameters.AddWithValue("@RubricId", rubricId);
-            cmd.Parameters.AddWithValue("@TotalMarks", textBox2.Text);
-            cmd.Parameters.AddWithValue("@DateUpdated", DateTime.Now);
-            cmd.Parameters.AddWithValue("@AssessmentId", assessmentId);
-            cmd.Parameters.AddWithValue("@Id", dataGridView1.SelectedRows[0].Cells[0].Value);
-
-            cmd.ExecuteNonQuery();
-            Program.connection.Close();
-            loadData();
-
-        }
-
         private void Cell_Click(object sender, DataGridViewCellEventArgs e)
         {
             var rows = dataGridView1.SelectedRows[0];
@@ -166,23 +36,63 @@ namespace DBProject
             textBox2.Text = rows.Cells[3].Value.ToString();
             UtilDL.showUD_Btns(addBtn, updateBtn, deleteBtn, udBtn);
         }
-
-        private void Delete_Data(object sender, EventArgs e)
+        private void Add_Data(object sender, EventArgs e)
         {
-            if (BoxIsNull())
-            {
+            if (BoxIsNull()) {
                 MsgDL.TextBoxEmptyError();
                 return;
             }
+            int assessmentId = QueryDL.GetIdFromTableUsingString("Id", "Assessment", "Title", AssessmentNameComboBox.Text);
+            int rubricId = QueryDL.GetIdFromTableUsingString("Id", "Rubric", "Details", RubricNameComboBox.Text);
+
             Program.connection.Open();
-            string query = "DELETE FROM AssessmentComponent WHERE Id = @Id";
+            string query = $"INSERT INTO AssessmentComponent VALUES (@Name, {rubricId}, @TotalMarks, @DateCreated, @DateUpdated, {assessmentId})";
+            
+            SqlCommand cmd = new SqlCommand(query, Program.connection);
+            cmd.Parameters.AddWithValue("@DateCreated", DateTime.Now);
+            loadParameters(cmd);
+            cmd.ExecuteNonQuery();
+            
+            Program.connection.Close();
+            MainDL.LoadDataOnGridTable(dataGridView1, "AssessmentComponent");
+        }
+        private void Update_Data(object sender, EventArgs e)
+        {
+            if (BoxIsNull()) {
+                MsgDL.TextBoxEmptyError();
+                return;
+            }
+            int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
+            int assessmentId = QueryDL.GetIdFromTableUsingString("Id", "Assessment", "Title", AssessmentNameComboBox.Text);
+            int rubricId = QueryDL.GetIdFromTableUsingString("Id", "Rubric", "Details", RubricNameComboBox.Text);
+            
+            Program.connection.Open();
+            string query = $"UPDATE AssessmentComponent SET Name = @Name, RubricId = {rubricId}, TotalMarks = @TotalMarks, DateUpdated = @DateUpdated, AssessmentId = {assessmentId} WHERE Id = {id}";
 
             SqlCommand cmd = new SqlCommand(query, Program.connection);
-            cmd.Parameters.AddWithValue("@Id", dataGridView1.SelectedRows[0].Cells[0].Value);
-
+            loadParameters(cmd);
             cmd.ExecuteNonQuery();
+
             Program.connection.Close();
-            loadData();
+            MainDL.LoadDataOnGridTable(dataGridView1, "AssessmentComponent");
+        }
+        private void Delete_Data(object sender, EventArgs e)
+        {
+            if (BoxIsNull()) {
+                MsgDL.TextBoxEmptyError();
+                return;
+            }
+            int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
+
+            QueryDL.DeleteFromTable("AssessmentComponent", "Id", id);
+
+            MainDL.LoadDataOnGridTable(dataGridView1, "AssessmentComponent");
+        }
+        private void loadParameters(SqlCommand cmd)
+        {
+            cmd.Parameters.AddWithValue("@Name", textBox1.Text);
+            cmd.Parameters.AddWithValue("@TotalMarks", textBox2.Text);
+            cmd.Parameters.AddWithValue("@DateUpdated", DateTime.Now);
         }
         private bool BoxIsNull()
         {
@@ -190,26 +100,6 @@ namespace DBProject
                 return true;
             return false;
         }
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void udBtn_Click(object sender, EventArgs e)
         {
             UtilDL.hideUD_Btns(addBtn, updateBtn, deleteBtn, udBtn);
