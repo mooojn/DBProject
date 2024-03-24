@@ -18,35 +18,20 @@ namespace DBProject
         {
             InitializeComponent();
         }
-
         private void Rubric_Load(object sender, EventArgs e)
         {
-            loadComboBox();
-            loadData();
+            MainDL.LoadDataOnGridTable(dataGridView1, "Rubric");
+            QueryDL.LoadComboBox(Clo_IDComboBox, "Name", "Clo");
             UtilDL.hideUD_Btns(addBtn, updateBtn, deleteBtn, udBtn);
-        }
-        private void loadComboBox()
-        {
-            Clo_IDComboBox.Items.Clear();
-            Program.connection.Open();
-            string query = "SELECT Name FROM Clo";
-            SqlCommand command = new SqlCommand(query, Program.connection);
-            SqlDataReader data = command.ExecuteReader();
-            while (data.Read())
-            {
-                Clo_IDComboBox.Items.Add(data[0]);
-            }
-            Program.connection.Close();
         }
         private void Cell_Click(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
-            textBox1.Text = selectedRow.Cells[1].Value.ToString();
-            Clo_IDComboBox.Text = selectedRow.Cells[2].Value.ToString();
+            DataGridViewRow row = dataGridView1.SelectedRows[0];
+            textBox1.Text = row.Cells[1].Value.ToString();
+            Clo_IDComboBox.Text = row.Cells[2].Value.ToString();
             UtilDL.showUD_Btns(addBtn, updateBtn, deleteBtn, udBtn);
         }
-
-        private void Insert_Data(object sender, EventArgs e)
+        private void Add_Data(object sender, EventArgs e)
         {
             if (textBoxIsNull()) {
                 MsgDL.TextBoxEmptyError();
@@ -54,41 +39,15 @@ namespace DBProject
             }
             Program.connection.Open();
             string query = "INSERT INTO Rubric values (@Details, (SELECT Id FROM Clo WHERE Name = @CloId))";
+            
             SqlCommand command = new SqlCommand(query, Program.connection);
-
-            command.Parameters.AddWithValue("@Details", textBox1.Text);
-            command.Parameters.AddWithValue("@CloId", Clo_IDComboBox.Text);
+            
+            loadParameters(command);
             command.ExecuteNonQuery();
+            
             Program.connection.Close();
-            loadData();
-
+            MainDL.LoadDataOnGridTable(dataGridView1, "Rubric");
         }
-        private int getId()
-        {
-            Program.connection.Open();
-            string query = "SELECT MAX(Id) FROM Rubric";
-            SqlCommand command = new SqlCommand(query, Program.connection);
-            SqlDataReader data = command.ExecuteReader();
-            int id = 0;
-            while (data.Read())
-            {
-                id = data.GetInt32(0);
-            }
-            Program.connection.Close();
-            return id + 1;
-
-        }
-        private void loadData()
-        {
-            Program.connection.Open();
-            string query = "SELECT * FROM Rubric";
-            SqlDataAdapter SDA = new SqlDataAdapter(query, Program.connection);
-            DataTable data = new DataTable();
-            SDA.Fill(data);
-            dataGridView1.DataSource = data;
-            Program.connection.Close();
-        }
-
         private void Update_Data(object sender, EventArgs e)
         {
             if (textBoxIsNull()) {
@@ -98,17 +57,15 @@ namespace DBProject
             Program.connection.Open();
             int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
 
-            string query = "UPDATE Rubric SET Details = @Details, CloId = @CloId " +
-                "WHERE Id = @Id";
+            string query = $"UPDATE Rubric SET Details = @Details, CloId = @CloId WHERE Id = {id}";
             
             SqlCommand command = new SqlCommand(query, Program.connection);
-            command.Parameters.AddWithValue("@Id", id);
-            command.Parameters.AddWithValue("@Details", textBox1.Text);
-            command.Parameters.AddWithValue("@CloId", Clo_IDComboBox.Text);
+            
+            loadParameters(command);
             command.ExecuteNonQuery();
             
             Program.connection.Close();
-            loadData();
+            MainDL.LoadDataOnGridTable(dataGridView1, "Rubric");
         }
 
         private void Delete_Data(object sender, EventArgs e)
@@ -118,28 +75,28 @@ namespace DBProject
                 return;
             }
             int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
-            Program.connection.Open();
-            string query = "DELETE FROM Rubric " +
-                "WHERE Id = @Id";
-
-            SqlCommand command = new SqlCommand(query, Program.connection);
-            command.Parameters.AddWithValue("@Id", id);
-            command.ExecuteNonQuery();
-
-            Program.connection.Close();
-            loadData();
+            
+            QueryDL.DeleteFromTable("Rubric", "Id", id);
+            
+            MainDL.LoadDataOnGridTable(dataGridView1, "Rubric");
         }
-        private bool textBoxIsNull()
+        private void loadParameters(SqlCommand cmd)
         {
-            if (textBox1.Text == "" || Clo_IDComboBox.Text == "") {
-                return true;
-            }
-            return false;
+            cmd.Parameters.AddWithValue("@Details", textBox1.Text);
+            cmd.Parameters.AddWithValue("@CloId", Clo_IDComboBox.Text);
         }
-
         private void udBtn_Click(object sender, EventArgs e)
         {
             UtilDL.hideUD_Btns(addBtn, updateBtn, deleteBtn, udBtn);
         }
+        private bool textBoxIsNull()
+        {
+            if (textBox1.Text == "" || Clo_IDComboBox.Text == "")
+            {
+                return true;
+            }
+            return false;
+        }
+        
     }
 }
