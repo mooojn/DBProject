@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.udBtn = new System.Windows.Forms.Button();
             this.RubricIdComboBox = new System.Windows.Forms.ComboBox();
             this.deleteBtn = new System.Windows.Forms.Button();
             this.updateBtn = new System.Windows.Forms.Button();
@@ -39,7 +40,6 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.addBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.udBtn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -64,6 +64,18 @@
             this.panel1.Size = new System.Drawing.Size(858, 534);
             this.panel1.TabIndex = 15;
             // 
+            // udBtn
+            // 
+            this.udBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(201)))), ((int)(((byte)(202)))));
+            this.udBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(246)))), ((int)(((byte)(242)))));
+            this.udBtn.Location = new System.Drawing.Point(259, 205);
+            this.udBtn.Name = "udBtn";
+            this.udBtn.Size = new System.Drawing.Size(138, 78);
+            this.udBtn.TabIndex = 25;
+            this.udBtn.Text = "Hide UD Buttons";
+            this.udBtn.UseVisualStyleBackColor = false;
+            this.udBtn.Click += new System.EventHandler(this.udBtn_Click);
+            // 
             // RubricIdComboBox
             // 
             this.RubricIdComboBox.FormattingEnabled = true;
@@ -78,7 +90,7 @@
             this.deleteBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(246)))), ((int)(((byte)(242)))));
             this.deleteBtn.Location = new System.Drawing.Point(456, 205);
             this.deleteBtn.Name = "deleteBtn";
-            this.deleteBtn.Size = new System.Drawing.Size(138, 63);
+            this.deleteBtn.Size = new System.Drawing.Size(138, 78);
             this.deleteBtn.TabIndex = 23;
             this.deleteBtn.Text = "Delete";
             this.deleteBtn.UseVisualStyleBackColor = false;
@@ -90,7 +102,7 @@
             this.updateBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(246)))), ((int)(((byte)(242)))));
             this.updateBtn.Location = new System.Drawing.Point(77, 205);
             this.updateBtn.Name = "updateBtn";
-            this.updateBtn.Size = new System.Drawing.Size(138, 63);
+            this.updateBtn.Size = new System.Drawing.Size(138, 78);
             this.updateBtn.TabIndex = 22;
             this.updateBtn.Text = "Update";
             this.updateBtn.UseVisualStyleBackColor = false;
@@ -158,7 +170,7 @@
             this.addBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(246)))), ((int)(((byte)(242)))));
             this.addBtn.Location = new System.Drawing.Point(259, 205);
             this.addBtn.Name = "addBtn";
-            this.addBtn.Size = new System.Drawing.Size(138, 63);
+            this.addBtn.Size = new System.Drawing.Size(138, 78);
             this.addBtn.TabIndex = 16;
             this.addBtn.Text = "Add";
             this.addBtn.UseVisualStyleBackColor = false;
@@ -173,18 +185,6 @@
             this.label1.Size = new System.Drawing.Size(97, 25);
             this.label1.TabIndex = 15;
             this.label1.Text = "Rubric Id";
-            // 
-            // udBtn
-            // 
-            this.udBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(201)))), ((int)(((byte)(202)))));
-            this.udBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(246)))), ((int)(((byte)(242)))));
-            this.udBtn.Location = new System.Drawing.Point(259, 205);
-            this.udBtn.Name = "udBtn";
-            this.udBtn.Size = new System.Drawing.Size(138, 63);
-            this.udBtn.TabIndex = 25;
-            this.udBtn.Text = "Hide UD Buttons";
-            this.udBtn.UseVisualStyleBackColor = false;
-            this.udBtn.Click += new System.EventHandler(this.udBtn_Click);
             // 
             // RubricLevel
             // 

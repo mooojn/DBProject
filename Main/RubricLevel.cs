@@ -16,83 +16,17 @@ namespace DBProject.Main
 {
     public partial class RubricLevel : Form
     {
+        public string subQuery = "(SELECT Id FROM Rubric WHERE Details = @Rubric)";
         public RubricLevel()
         {
             InitializeComponent();
         }
         private void RubricLevel_Load(object sender, EventArgs e)
         {
-            loadData();
-            loadRubricId();
+            MainDL.LoadDataOnGridTable(dataGridView1, "RubricLevel");
+            QueryDL.LoadComboBox(RubricIdComboBox, "Details", "Rubric");
             UtilDL.hideUD_Btns(addBtn, updateBtn, deleteBtn, udBtn);
         }
-
-        private void Add_Data(object sender, EventArgs e)
-        {
-            if (BoxIsNull())
-            {
-                MsgDL.TextBoxEmptyError();
-                return;
-            }
-            Program.connection.Open();
-            string query = "INSERT INTO RubricLevel VALUES (@RubricId, @Details, @MeasurementLevel)";
-            
-            SqlCommand command = new SqlCommand(query, Program.connection);
-            command.Parameters.AddWithValue("@RubricId", RubricIdComboBox.Text);
-            command.Parameters.AddWithValue("@Details", textBox1.Text);
-            int measureLevel = getRubricLevelInteger();
-            command.Parameters.AddWithValue("@MeasurementLevel", measureLevel);
-            command.ExecuteNonQuery();
-            
-            Program.connection.Close();
-            loadData();
-        }
-        private int getRubricLevelInteger()
-        {
-            int level = -1;
-            string text = RubricLevelComboBox.Text;
-            
-            if (text == "Unsatisfactory")
-            {
-                level = 1;
-            }
-            else if (text == "Fair")
-            {
-                level = 2;
-            }
-            else if (text == "Good")
-            {
-                level = 3;
-            }
-            else if (text == "Exceptional")
-            {
-                level = 4;
-            }
-            return level;
-        }
-        private void loadData()
-        {
-            Program.connection.Open();
-            string query = "SELECT * FROM RubricLevel";
-            SqlDataAdapter sda = new SqlDataAdapter(query, Program.connection);
-            DataTable dt = new DataTable();
-            sda.Fill(dt);
-            dataGridView1.DataSource = dt;
-            Program.connection.Close();
-        }
-        private void loadRubricId()
-        {
-            Program.connection.Open();
-            string query = "SELECT Id FROM Rubric";
-            SqlCommand command = new SqlCommand(query, Program.connection);
-            SqlDataReader data = command.ExecuteReader();
-            while (data.Read())
-            {
-                RubricIdComboBox.Items.Add(data[0]);
-            }
-                Program.connection.Close();
-        }
-
         private void Cell_Click(object sender, DataGridViewCellEventArgs e)
         {
             var row = dataGridView1.SelectedRows[0];
@@ -101,53 +35,72 @@ namespace DBProject.Main
             RubricLevelComboBox.Text = row.Cells[3].Value.ToString();
             UtilDL.showUD_Btns(addBtn, updateBtn, deleteBtn, udBtn);
         }
-
+        private void Add_Data(object sender, EventArgs e)
+        {
+            if (BoxIsNull()) {
+                MsgDL.TextBoxEmptyError();
+                return;
+            }
+            Program.connection.Open();
+            string query = $"INSERT INTO RubricLevel VALUES ({subQuery}, @Details, @MeasurementLevel)";
+            
+            SqlCommand command = new SqlCommand(query, Program.connection);
+            loadParameters(command);
+            command.ExecuteNonQuery();
+            
+            Program.connection.Close();
+            MainDL.LoadDataOnGridTable(dataGridView1, "RubricLevel");
+        }
         private void Update_Data(object sender, EventArgs e)
         {
-            if (BoxIsNull())
-            {
+            if (BoxIsNull()) {
                 MsgDL.TextBoxEmptyError();
                 return;
             }
             int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
             Program.connection.Open();
-            string query = "UPDATE RubricLevel SET RubricId = @RubricId, Details = @Details, " +
-                "MeasurementLevel = @MeasurementLevel " +
-                "WHERE Id = @Id";
+            string query = $"UPDATE RubricLevel SET RubricId = ({subQuery}, Details = @Details, MeasurementLevel = @MeasurementLevel WHERE Id = {id}";
             
             SqlCommand command = new SqlCommand(query, Program.connection);
-            command.Parameters.AddWithValue("@Id", id);
-            command.Parameters.AddWithValue("@RubricId", RubricIdComboBox.Text);
-            command.Parameters.AddWithValue("@Details", textBox1.Text);
-            int measureLevel = getRubricLevelInteger();
-            command.Parameters.AddWithValue("@MeasurementLevel", measureLevel);
+            loadParameters(command);
             command.ExecuteNonQuery();
             
             Program.connection.Close();
-            
-            loadData();
+            MainDL.LoadDataOnGridTable(dataGridView1, "RubricLevel");
         }
-
         private void Delete_Data(object sender, EventArgs e)
         {
-            if (BoxIsNull())
-            {
+            if (BoxIsNull()) {
                 MsgDL.TextBoxEmptyError();
                 return;
-            }
+            }            
             int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
-            Program.connection.Open();
-            string query = "DELETE FROM RubricLevel " +
-                "WHERE Id = @Id";
-
-            SqlCommand command = new SqlCommand(query, Program.connection);
-            command.Parameters.AddWithValue("@Id", id);
             
-            command.ExecuteNonQuery();
+            QueryDL.DeleteFromTable("RubricLevel", "Id", id);
 
-            Program.connection.Close();
+            MainDL.LoadDataOnGridTable(dataGridView1, "RubricLevel");
+        }
+        private void loadParameters(SqlCommand cmd)
+        {
+            cmd.Parameters.AddWithValue("@Rubric", RubricIdComboBox.Text);
+            cmd.Parameters.AddWithValue("@Details", textBox1.Text);
+            cmd.Parameters.AddWithValue("@MeasurementLevel", getRubricLevelInteger());
+        }
+        private int getRubricLevelInteger()
+        {
+            int level = -1;
+            string text = RubricLevelComboBox.Text;
 
-            loadData();
+            if (text == "Unsatisfactory")
+                level = 1;
+            else if (text == "Fair")
+                level = 2;
+            else if (text == "Good")
+                level = 3;
+            else if (text == "Exceptional")
+                level = 4;
+
+            return level;
         }
 
         private void udBtn_Click(object sender, EventArgs e)
