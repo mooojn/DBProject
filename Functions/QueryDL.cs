@@ -59,5 +59,18 @@ namespace DBProject
 
             return id;
         }
+        public static void LoadComboBox(ComboBox box, string field, string table)
+        {
+            box.Items.Clear();
+            Program.connection.Open();
+            string query = $"SELECT {field} FROM {table}";
+            SqlCommand command = new SqlCommand(query, Program.connection);
+            SqlDataReader data = command.ExecuteReader();
+            while (data.Read())
+            {
+                box.Items.Add(data[0]);
+            }
+            Program.connection.Close();
+        }
     }
 }
