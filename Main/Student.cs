@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using DBProject.Functions;
 
 namespace DBProject
 {
@@ -20,7 +21,7 @@ namespace DBProject
         private void Students_Load(object sender, EventArgs e)
         {
             MainDL.LoadDataOnGridTable(dataGridView1, "Student");
-            hide_UD_Btns();
+            UtilDL.hideUD_Btns(addBtn, updateBtn, deleteBtn, udBtn);
         }
         private void Data_Table_Click(object sender, DataGridViewCellEventArgs e)
         {
@@ -34,7 +35,7 @@ namespace DBProject
             stdRegNoBox.Text = row.Cells[5].Value.ToString();
 
             MainDL.LoadDataOnGridTable(dataGridView1, "Student");
-            show_UD_Btns();
+            UtilDL.showUD_Btns(addBtn, updateBtn, deleteBtn, udBtn);
         }
         private void Add_Student(object sender, EventArgs e)
         {
@@ -108,27 +109,9 @@ namespace DBProject
             }
             return false;
         }
-        private void show_UD_Btns()
-        {
-            // A btn
-            addBtn.Hide();
-            // UD btns
-            hideUdBtn.Show();
-            updateBtn.Show();
-            deleteBtn.Show();
-        }
-        private void hide_UD_Btns()
-        {
-            // A btn
-            addBtn.Show();
-            // UD btns
-            hideUdBtn.Hide();
-            updateBtn.Hide();
-            deleteBtn.Hide();
-        }
         private void hideUdBtn_Click(object sender, EventArgs e)
         {
-            hide_UD_Btns();
+            UtilDL.hideUD_Btns(addBtn, updateBtn, deleteBtn, udBtn);
         }
         private void Mark_Attendance(object sender, EventArgs e)
         {

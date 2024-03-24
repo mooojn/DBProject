@@ -31,7 +31,7 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.panel1 = new System.Windows.Forms.Panel();
             this.addStudentPanel = new System.Windows.Forms.Panel();
-            this.hideUdBtn = new System.Windows.Forms.Button();
+            this.udBtn = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.stdContactBox = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
@@ -66,7 +66,7 @@
             // 
             this.addStudentPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(91)))), ((int)(((byte)(100)))));
             this.addStudentPanel.Controls.Add(this.dataGridView1);
-            this.addStudentPanel.Controls.Add(this.hideUdBtn);
+            this.addStudentPanel.Controls.Add(this.udBtn);
             this.addStudentPanel.Controls.Add(this.label3);
             this.addStudentPanel.Controls.Add(this.stdContactBox);
             this.addStudentPanel.Controls.Add(this.button3);
@@ -88,17 +88,17 @@
             this.addStudentPanel.TabIndex = 32;
             this.addStudentPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.addStudentPanel_Paint);
             // 
-            // hideUdBtn
+            // udBtn
             // 
-            this.hideUdBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(201)))), ((int)(((byte)(202)))));
-            this.hideUdBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.hideUdBtn.Location = new System.Drawing.Point(478, 253);
-            this.hideUdBtn.Name = "hideUdBtn";
-            this.hideUdBtn.Size = new System.Drawing.Size(168, 65);
-            this.hideUdBtn.TabIndex = 26;
-            this.hideUdBtn.Text = "Hide UD Buttons";
-            this.hideUdBtn.UseVisualStyleBackColor = false;
-            this.hideUdBtn.Click += new System.EventHandler(this.hideUdBtn_Click);
+            this.udBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(201)))), ((int)(((byte)(202)))));
+            this.udBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.udBtn.Location = new System.Drawing.Point(478, 253);
+            this.udBtn.Name = "udBtn";
+            this.udBtn.Size = new System.Drawing.Size(168, 65);
+            this.udBtn.TabIndex = 26;
+            this.udBtn.Text = "Hide UD Buttons";
+            this.udBtn.UseVisualStyleBackColor = false;
+            this.udBtn.Click += new System.EventHandler(this.hideUdBtn_Click);
             // 
             // label3
             // 
@@ -282,7 +282,7 @@
         private System.Windows.Forms.Button addBtn;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox stdContactBox;
-        private System.Windows.Forms.Button hideUdBtn;
+        private System.Windows.Forms.Button udBtn;
         private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

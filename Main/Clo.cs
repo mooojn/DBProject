@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Net;
+using DBProject.Functions;
 
 namespace DBProject
 {
@@ -22,14 +23,14 @@ namespace DBProject
         
         private void Clos_Load(object sender, EventArgs e)
         {
-            hideUD_Btns();
+            UtilDL.hideUD_Btns(addBtn, updateBtn, deleteBtn, udBtn);
         }
 
         private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
             var row = dataGridView1.SelectedRows[0];
             textBox1.Text = row.Cells[1].Value.ToString();
-            showUD_Btns();
+            UtilDL.showUD_Btns(addBtn, updateBtn, deleteBtn, udBtn);
         }
 
         private void Add_Data(object sender, EventArgs e)
@@ -95,24 +96,7 @@ namespace DBProject
         }
         private void UD_Btn_Click(object sender, EventArgs e)
         {
-            hideUD_Btns();
+            UtilDL.hideUD_Btns(addBtn, updateBtn, deleteBtn, udBtn);
         }
-        private void hideUD_Btns()
-        {
-            addBtn.Show();
-
-            UD_Btn.Hide();
-            updateBtn.Hide();
-            deleteBtn.Hide();
-        }
-        private void showUD_Btns()
-        {
-            UD_Btn.Show();
-            updateBtn.Show();
-            deleteBtn.Show();
-
-            addBtn.Hide();
-        }
-
     }
 }

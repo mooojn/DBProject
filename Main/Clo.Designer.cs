@@ -31,12 +31,12 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.udBtn = new System.Windows.Forms.Button();
             this.deleteBtn = new System.Windows.Forms.Button();
             this.updateBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.addBtn = new System.Windows.Forms.Button();
-            this.UD_Btn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -72,7 +72,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(91)))), ((int)(((byte)(100)))));
-            this.panel2.Controls.Add(this.UD_Btn);
+            this.panel2.Controls.Add(this.udBtn);
             this.panel2.Controls.Add(this.deleteBtn);
             this.panel2.Controls.Add(this.updateBtn);
             this.panel2.Controls.Add(this.label1);
@@ -82,6 +82,18 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(625, 238);
             this.panel2.TabIndex = 4;
+            // 
+            // udBtn
+            // 
+            this.udBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(201)))), ((int)(((byte)(202)))));
+            this.udBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(246)))), ((int)(((byte)(242)))));
+            this.udBtn.Location = new System.Drawing.Point(245, 131);
+            this.udBtn.Name = "udBtn";
+            this.udBtn.Size = new System.Drawing.Size(142, 75);
+            this.udBtn.TabIndex = 5;
+            this.udBtn.Text = "Hide UD Buttons";
+            this.udBtn.UseVisualStyleBackColor = false;
+            this.udBtn.Click += new System.EventHandler(this.UD_Btn_Click);
             // 
             // deleteBtn
             // 
@@ -136,18 +148,6 @@
             this.addBtn.UseVisualStyleBackColor = false;
             this.addBtn.Click += new System.EventHandler(this.Add_Data);
             // 
-            // UD_Btn
-            // 
-            this.UD_Btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(201)))), ((int)(((byte)(202)))));
-            this.UD_Btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(246)))), ((int)(((byte)(242)))));
-            this.UD_Btn.Location = new System.Drawing.Point(245, 131);
-            this.UD_Btn.Name = "UD_Btn";
-            this.UD_Btn.Size = new System.Drawing.Size(142, 75);
-            this.UD_Btn.TabIndex = 5;
-            this.UD_Btn.Text = "Hide UD Buttons";
-            this.UD_Btn.UseVisualStyleBackColor = false;
-            this.UD_Btn.Click += new System.EventHandler(this.UD_Btn_Click);
-            // 
             // Clo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -175,6 +175,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button addBtn;
-        private System.Windows.Forms.Button UD_Btn;
+        private System.Windows.Forms.Button udBtn;
     }
 }

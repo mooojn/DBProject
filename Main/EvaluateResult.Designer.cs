@@ -94,6 +94,7 @@
             this.RubricDetailComboBox.Name = "RubricDetailComboBox";
             this.RubricDetailComboBox.Size = new System.Drawing.Size(209, 33);
             this.RubricDetailComboBox.TabIndex = 56;
+            this.RubricDetailComboBox.SelectedValueChanged += new System.EventHandler(this.RubricDetailComboBox_SelectedValueChanged);
             // 
             // label5
             // 
@@ -112,6 +113,7 @@
             this.AssessmentComboBox.Name = "AssessmentComboBox";
             this.AssessmentComboBox.Size = new System.Drawing.Size(209, 33);
             this.AssessmentComboBox.TabIndex = 54;
+            this.AssessmentComboBox.SelectedValueChanged += new System.EventHandler(this.AssessmentComboBox_SelectedValueChanged);
             // 
             // label6
             // 
@@ -148,6 +150,7 @@
             this.ComponentComboBox.Name = "ComponentComboBox";
             this.ComponentComboBox.Size = new System.Drawing.Size(209, 33);
             this.ComponentComboBox.TabIndex = 50;
+            this.ComponentComboBox.SelectedValueChanged += new System.EventHandler(this.ComponentComboBox_SelectedValueChanged);
             // 
             // label1
             // 
@@ -201,7 +204,7 @@
             this.button1.TabIndex = 45;
             this.button1.Text = "Evaluate";
             this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.button1.Click += new System.EventHandler(this.Add_Data);
             // 
             // EvaluateResult
             // 

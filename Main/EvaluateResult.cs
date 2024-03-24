@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -34,7 +34,7 @@ namespace DBProject
         {
             dataGridView1.Columns.Add("Student", "Student");
             dataGridView1.Columns.Add("Assessment", "Assessment");
-            dataGridView1.Columns.Add("Rubric Level", "Rubric Level");            
+            dataGridView1.Columns.Add("Rubric Level", "Rubric Level");
 
             dataGridView1.Columns.Add("Total Marks", "Total Marks");
             dataGridView1.Columns.Add("Obtained Marks", "Obtained Marks");
@@ -50,17 +50,19 @@ namespace DBProject
             SqlDataAdapter SDA = new SqlDataAdapter(query, Program.connection);
             DataTable dt = new DataTable();
             SDA.Fill(dt);
-            
+
             Program.connection.Close();
-            if (dt.Rows.Count > 0) {
-                foreach (DataRow row in dt.Rows) {
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
                     int stdId = Convert.ToInt32(row["StudentId"]);
                     int assessmentId = Convert.ToInt32(row["AssessmentComponentId"]);
                     int rubricId = Convert.ToInt32(row["RubricMeasurementId"]);
                     int totalMarks = 100;// remove hardcoding
-                 
+
                     float obtainedMarks = CalculateMarks(assessmentId, rubricId);
-                 
+
                     dataGridView1.Rows.Add(stdId, assessmentId, rubricId, totalMarks, obtainedMarks);
                 }
             }
@@ -76,7 +78,7 @@ namespace DBProject
             string query3 = $"SELECT MeasurementLevel FROM RubricLevel WHERE Id = {rubricId}";
             float currentRubricLevel = getField(query3);
 
-            return (currentRubricLevel /maxRubricLevel) * componentMarks;  
+            return (currentRubricLevel / maxRubricLevel) * componentMarks;
         }
         private float getField(string query)
         {
@@ -84,7 +86,7 @@ namespace DBProject
 
             SqlCommand command = new SqlCommand(query, Program.connection);
             float field = Convert.ToInt32(command.ExecuteScalar());
-            
+
             Program.connection.Close();
             return field;
         }
@@ -98,7 +100,7 @@ namespace DBProject
             while (reader.Read())
             {
                 ComboBoxToUse.Items.Add(reader[0]);
-                
+
             }
             Program.connection.Close();
         }
@@ -119,6 +121,11 @@ namespace DBProject
 
         private void Add_Data(object sender, EventArgs e)
         {
+            if (BoxIsNull())
+            {
+                MsgDL.TextBoxEmptyError();
+                return;
+            }
             int stdId = QueryDL.GetIdFromTableUsingString("Id", "Student", "FirstName", StudentComboBox.Text);
             int assessmentId = QueryDL.GetIdFromTableUsingString("Id", "AssessmentComponent", "Name", ComponentComboBox.Text);
             int rubricId = QueryDL.GetIdFromTableUsingString("Id", "RubricLevel", "MeasurementLevel", RubricLevelComboBox.Text);
@@ -131,18 +138,13 @@ namespace DBProject
             command.Parameters.AddWithValue("@AssessmentComponentId", assessmentId);
             command.Parameters.AddWithValue("@RubricMeasurementId", rubricId);
             command.Parameters.AddWithValue("@EvaluationDate", dateTimePicker1.Value);
-            
+
             command.ExecuteNonQuery();
 
 
             Program.connection.Close();
 
             loadData();
-        }
-
-        private void StudentComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void AssessmentComboBox_SelectedValueChanged(object sender, EventArgs e)
@@ -156,22 +158,19 @@ namespace DBProject
             string subQuery = $"Id = (SELECT RubricId FROM AssessmentComponent WHERE Name = '{ComponentComboBox.Text}')";
             loadComboBoxWhere(RubricDetailComboBox, "Details", "Rubric", subQuery);
         }
-
-        private void RubricLevelComboBox_SelectedValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void RubricDetailComboBox_SelectedValueChanged(object sender, EventArgs e)
         {
-            
+
             string subQuery = $"RubricId = (SELECT Id FROM Rubric WHERE Details = '{RubricDetailComboBox.Text}')";
             loadComboBoxWhere(RubricLevelComboBox, "MeasurementLevel", "RubricLevel", subQuery);
         }
-
-        private void button1_Click_1(object sender, EventArgs e)
+        private bool BoxIsNull()
         {
-
+            if (StudentComboBox.Text == "" || ComponentComboBox.Text == "" || RubricDetailComboBox.Text == "" || RubricLevelComboBox.Text == "" || AssessmentComboBox.Text == "")
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

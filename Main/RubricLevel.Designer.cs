@@ -30,15 +30,16 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.RubricIdComboBox = new System.Windows.Forms.ComboBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.deleteBtn = new System.Windows.Forms.Button();
+            this.updateBtn = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.RubricLevelComboBox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
+            this.addBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.udBtn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -46,15 +47,16 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(91)))), ((int)(((byte)(100)))));
+            this.panel1.Controls.Add(this.udBtn);
             this.panel1.Controls.Add(this.RubricIdComboBox);
-            this.panel1.Controls.Add(this.button3);
-            this.panel1.Controls.Add(this.button2);
+            this.panel1.Controls.Add(this.deleteBtn);
+            this.panel1.Controls.Add(this.updateBtn);
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.RubricLevelComboBox);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.dataGridView1);
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.addBtn);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -70,29 +72,29 @@
             this.RubricIdComboBox.Size = new System.Drawing.Size(214, 33);
             this.RubricIdComboBox.TabIndex = 24;
             // 
-            // button3
+            // deleteBtn
             // 
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(201)))), ((int)(((byte)(202)))));
-            this.button3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(246)))), ((int)(((byte)(242)))));
-            this.button3.Location = new System.Drawing.Point(456, 205);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(138, 63);
-            this.button3.TabIndex = 23;
-            this.button3.Text = "Delete";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.Delete_Data);
+            this.deleteBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(201)))), ((int)(((byte)(202)))));
+            this.deleteBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(246)))), ((int)(((byte)(242)))));
+            this.deleteBtn.Location = new System.Drawing.Point(456, 205);
+            this.deleteBtn.Name = "deleteBtn";
+            this.deleteBtn.Size = new System.Drawing.Size(138, 63);
+            this.deleteBtn.TabIndex = 23;
+            this.deleteBtn.Text = "Delete";
+            this.deleteBtn.UseVisualStyleBackColor = false;
+            this.deleteBtn.Click += new System.EventHandler(this.Delete_Data);
             // 
-            // button2
+            // updateBtn
             // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(201)))), ((int)(((byte)(202)))));
-            this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(246)))), ((int)(((byte)(242)))));
-            this.button2.Location = new System.Drawing.Point(276, 205);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(138, 63);
-            this.button2.TabIndex = 22;
-            this.button2.Text = "Update";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.Update_Data);
+            this.updateBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(201)))), ((int)(((byte)(202)))));
+            this.updateBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(246)))), ((int)(((byte)(242)))));
+            this.updateBtn.Location = new System.Drawing.Point(77, 205);
+            this.updateBtn.Name = "updateBtn";
+            this.updateBtn.Size = new System.Drawing.Size(138, 63);
+            this.updateBtn.TabIndex = 22;
+            this.updateBtn.Text = "Update";
+            this.updateBtn.UseVisualStyleBackColor = false;
+            this.updateBtn.Click += new System.EventHandler(this.Update_Data);
             // 
             // textBox1
             // 
@@ -150,17 +152,17 @@
             this.dataGridView1.TabIndex = 17;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Cell_Click);
             // 
-            // button1
+            // addBtn
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(201)))), ((int)(((byte)(202)))));
-            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(246)))), ((int)(((byte)(242)))));
-            this.button1.Location = new System.Drawing.Point(86, 205);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(138, 63);
-            this.button1.TabIndex = 16;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.Add_Data);
+            this.addBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(201)))), ((int)(((byte)(202)))));
+            this.addBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(246)))), ((int)(((byte)(242)))));
+            this.addBtn.Location = new System.Drawing.Point(259, 205);
+            this.addBtn.Name = "addBtn";
+            this.addBtn.Size = new System.Drawing.Size(138, 63);
+            this.addBtn.TabIndex = 16;
+            this.addBtn.Text = "Add";
+            this.addBtn.UseVisualStyleBackColor = false;
+            this.addBtn.Click += new System.EventHandler(this.Add_Data);
             // 
             // label1
             // 
@@ -171,6 +173,18 @@
             this.label1.Size = new System.Drawing.Size(97, 25);
             this.label1.TabIndex = 15;
             this.label1.Text = "Rubric Id";
+            // 
+            // udBtn
+            // 
+            this.udBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(201)))), ((int)(((byte)(202)))));
+            this.udBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(246)))), ((int)(((byte)(242)))));
+            this.udBtn.Location = new System.Drawing.Point(259, 205);
+            this.udBtn.Name = "udBtn";
+            this.udBtn.Size = new System.Drawing.Size(138, 63);
+            this.udBtn.TabIndex = 25;
+            this.udBtn.Text = "Hide UD Buttons";
+            this.udBtn.UseVisualStyleBackColor = false;
+            this.udBtn.Click += new System.EventHandler(this.udBtn_Click);
             // 
             // RubricLevel
             // 
@@ -192,14 +206,15 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox RubricIdComboBox;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button deleteBtn;
+        private System.Windows.Forms.Button updateBtn;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ComboBox RubricLevelComboBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button addBtn;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button udBtn;
     }
 }

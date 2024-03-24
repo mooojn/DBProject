@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Runtime.InteropServices;
+using DBProject.Functions;
 
 namespace DBProject
 {
@@ -25,6 +26,7 @@ namespace DBProject
             loadData();
             loadAssessmentData();
             loadRubricData();
+            UtilDL.hideUD_Btns(addBtn, updateBtn, deleteBtn, udBtn);
         }
         private void loadRubricData()
         {
@@ -72,6 +74,11 @@ namespace DBProject
 
         private void Add_Data(object sender, EventArgs e)
         {
+            if (BoxIsNull())
+            {
+                MsgDL.TextBoxEmptyError();
+                return;
+            }
             int assessmentId = getAssessmentId();
             int rubricId = getRubricId();
 
@@ -126,6 +133,11 @@ namespace DBProject
         }
         private void Update_Data(object sender, EventArgs e)
         {
+            if (BoxIsNull())
+            {
+                MsgDL.TextBoxEmptyError();
+                return;
+            }
             int assessmentId = getAssessmentId();
             int rubricId = getRubricId();
             Program.connection.Open();
@@ -152,10 +164,16 @@ namespace DBProject
             var rows = dataGridView1.SelectedRows[0];
             textBox1.Text = rows.Cells[1].Value.ToString();
             textBox2.Text = rows.Cells[3].Value.ToString();
+            UtilDL.showUD_Btns(addBtn, updateBtn, deleteBtn, udBtn);
         }
 
         private void Delete_Data(object sender, EventArgs e)
         {
+            if (BoxIsNull())
+            {
+                MsgDL.TextBoxEmptyError();
+                return;
+            }
             Program.connection.Open();
             string query = "DELETE FROM AssessmentComponent WHERE Id = @Id";
 
@@ -166,7 +184,12 @@ namespace DBProject
             Program.connection.Close();
             loadData();
         }
-
+        private bool BoxIsNull()
+        {
+            if (textBox1.Text == "" || textBox2.Text == "" || AssessmentNameComboBox.Text == "" || RubricNameComboBox.Text == "")
+                return true;
+            return false;
+        }
         private void label3_Click(object sender, EventArgs e)
         {
 
@@ -185,6 +208,11 @@ namespace DBProject
         private void label2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void udBtn_Click(object sender, EventArgs e)
+        {
+            UtilDL.hideUD_Btns(addBtn, updateBtn, deleteBtn, udBtn);
         }
     }
 }

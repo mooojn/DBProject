@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using DBProject.Functions;
 
 namespace DBProject
 {
@@ -21,10 +22,16 @@ namespace DBProject
         private void Assesment_Load(object sender, EventArgs e)
         {
             loadData();
+            UtilDL.hideUD_Btns(addBtn, updateBtn, deleteBtn, udBtn);
         }
 
         private void Add_Data(object sender, EventArgs e)
         {
+            if (BoxIsNull())
+            {
+                MsgDL.TextBoxEmptyError();
+                return;
+            }
             Program.connection.Open();
             string query = "INSERT INTO Assessment values" +
                 "(@Title, @DateCreated, @TotalMarks, @TotalWeightage)";
@@ -41,6 +48,11 @@ namespace DBProject
 
         private void Update_Data(object sender, EventArgs e)
         {
+            if (BoxIsNull())
+            {
+                MsgDL.TextBoxEmptyError();
+                return;
+            }
             DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
             int id = Convert.ToInt32(selectedRow.Cells[0].Value);   
 
@@ -68,6 +80,7 @@ namespace DBProject
             textBox1.Text = row.Cells[1].Value.ToString();
             textBox2.Text = row.Cells[3].Value.ToString();
             textBox3.Text = row.Cells[4].Value.ToString();
+            UtilDL.showUD_Btns(addBtn, updateBtn, deleteBtn, udBtn);
         }
         private void loadData()
         {
@@ -82,6 +95,11 @@ namespace DBProject
 
         private void Delete_Data(object sender, EventArgs e)
         {
+            if (BoxIsNull())
+            {
+                MsgDL.TextBoxEmptyError();
+                return;
+            }
             int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
             Program.connection.Open();
             string query = "DELETE FROM Assessment WHERE Id = @Id";
@@ -98,6 +116,17 @@ namespace DBProject
             AssesmentComponent form = new AssesmentComponent();
             form.StartPosition = FormStartPosition.CenterScreen;
             form.Show();
+        }
+
+        private void udBtn_Click(object sender, EventArgs e)
+        {
+            UtilDL.hideUD_Btns(addBtn, updateBtn, deleteBtn, udBtn);
+        }
+        private bool BoxIsNull()
+        {
+            if (textBox1.Text == "" || textBox2.Text == "" || textBox3.Text == "")
+                return true;
+            return false;
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using DBProject.Functions;
 
 namespace DBProject
 {
@@ -22,6 +23,7 @@ namespace DBProject
         {
             loadComboBox();
             loadData();
+            UtilDL.hideUD_Btns(addBtn, updateBtn, deleteBtn, udBtn);
         }
         private void loadComboBox()
         {
@@ -38,25 +40,22 @@ namespace DBProject
         }
         private void Cell_Click(object sender, DataGridViewCellEventArgs e)
         {
-            
-            
-                DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+            DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
             textBox1.Text = selectedRow.Cells[1].Value.ToString();
             Clo_IDComboBox.Text = selectedRow.Cells[2].Value.ToString();
-            
-
-
-            
+            UtilDL.showUD_Btns(addBtn, updateBtn, deleteBtn, udBtn);
         }
 
         private void Insert_Data(object sender, EventArgs e)
         {
-            //int id = getId();
-
+            if (textBoxIsNull()) {
+                MsgDL.TextBoxEmptyError();
+                return;
+            }
             Program.connection.Open();
             string query = "INSERT INTO Rubric values (@Details, (SELECT Id FROM Clo WHERE Name = @CloId))";
             SqlCommand command = new SqlCommand(query, Program.connection);
-            //command.Parameters.AddWithValue("@Id", id);
+
             command.Parameters.AddWithValue("@Details", textBox1.Text);
             command.Parameters.AddWithValue("@CloId", Clo_IDComboBox.Text);
             command.ExecuteNonQuery();
@@ -92,6 +91,10 @@ namespace DBProject
 
         private void Update_Data(object sender, EventArgs e)
         {
+            if (textBoxIsNull()) {
+                MsgDL.TextBoxEmptyError();
+                return;
+            }
             Program.connection.Open();
             int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
 
@@ -110,6 +113,10 @@ namespace DBProject
 
         private void Delete_Data(object sender, EventArgs e)
         {
+            if (textBoxIsNull()) {
+                MsgDL.TextBoxEmptyError();
+                return;
+            }
             int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
             Program.connection.Open();
             string query = "DELETE FROM Rubric " +
@@ -121,6 +128,18 @@ namespace DBProject
 
             Program.connection.Close();
             loadData();
+        }
+        private bool textBoxIsNull()
+        {
+            if (textBox1.Text == "" || Clo_IDComboBox.Text == "") {
+                return true;
+            }
+            return false;
+        }
+
+        private void udBtn_Click(object sender, EventArgs e)
+        {
+            UtilDL.hideUD_Btns(addBtn, updateBtn, deleteBtn, udBtn);
         }
     }
 }

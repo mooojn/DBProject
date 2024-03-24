@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Security.AccessControl;
+using System.util;
+using DBProject.Functions;
 
 namespace DBProject.Main
 {
@@ -22,10 +24,16 @@ namespace DBProject.Main
         {
             loadData();
             loadRubricId();
+            UtilDL.hideUD_Btns(addBtn, updateBtn, deleteBtn, udBtn);
         }
 
         private void Add_Data(object sender, EventArgs e)
         {
+            if (BoxIsNull())
+            {
+                MsgDL.TextBoxEmptyError();
+                return;
+            }
             Program.connection.Open();
             string query = "INSERT INTO RubricLevel VALUES (@RubricId, @Details, @MeasurementLevel)";
             
@@ -91,10 +99,16 @@ namespace DBProject.Main
             RubricIdComboBox.Text = row.Cells[1].Value.ToString();
             textBox1.Text = row.Cells[2].Value.ToString();
             RubricLevelComboBox.Text = row.Cells[3].Value.ToString();
+            UtilDL.showUD_Btns(addBtn, updateBtn, deleteBtn, udBtn);
         }
 
         private void Update_Data(object sender, EventArgs e)
         {
+            if (BoxIsNull())
+            {
+                MsgDL.TextBoxEmptyError();
+                return;
+            }
             int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
             Program.connection.Open();
             string query = "UPDATE RubricLevel SET RubricId = @RubricId, Details = @Details, " +
@@ -116,6 +130,11 @@ namespace DBProject.Main
 
         private void Delete_Data(object sender, EventArgs e)
         {
+            if (BoxIsNull())
+            {
+                MsgDL.TextBoxEmptyError();
+                return;
+            }
             int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
             Program.connection.Open();
             string query = "DELETE FROM RubricLevel " +
@@ -129,6 +148,17 @@ namespace DBProject.Main
             Program.connection.Close();
 
             loadData();
+        }
+
+        private void udBtn_Click(object sender, EventArgs e)
+        {
+            UtilDL.hideUD_Btns(addBtn, updateBtn, deleteBtn, udBtn);
+        }
+        private bool BoxIsNull()
+        {
+            if (textBox1.Text == "" || RubricIdComboBox.Text == "" || RubricLevelComboBox.Text == "")
+                return true;
+            return false;
         }
     }
 }
