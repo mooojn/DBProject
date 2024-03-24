@@ -21,59 +21,9 @@ namespace DBProject
 
         private void Assesment_Load(object sender, EventArgs e)
         {
-            loadData();
+            MainDL.LoadDataOnGridTable(dataGridView1, "Assessment");
             UtilDL.hideUD_Btns(addBtn, updateBtn, deleteBtn, udBtn);
         }
-
-        private void Add_Data(object sender, EventArgs e)
-        {
-            if (BoxIsNull())
-            {
-                MsgDL.TextBoxEmptyError();
-                return;
-            }
-            Program.connection.Open();
-            string query = "INSERT INTO Assessment values" +
-                "(@Title, @DateCreated, @TotalMarks, @TotalWeightage)";
-            SqlCommand command = new SqlCommand(query, Program.connection);
-            command.Parameters.AddWithValue("@Title", textBox1.Text);    
-            command.Parameters.AddWithValue("@DateCreated", DateTime.Now);
-            command.Parameters.AddWithValue("@TotalMarks", textBox2.Text);
-            command.Parameters.AddWithValue("@TotalWeightage", textBox3.Text);
-            command.ExecuteNonQuery();
-            Program.connection.Close();
-            
-            loadData();
-        }
-
-        private void Update_Data(object sender, EventArgs e)
-        {
-            if (BoxIsNull())
-            {
-                MsgDL.TextBoxEmptyError();
-                return;
-            }
-            DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
-            int id = Convert.ToInt32(selectedRow.Cells[0].Value);   
-
-            Program.connection.Open();
-            string query = "UPDATE Assessment SET Title = @Title, TotalMarks = @TotalMarks," +
-                " TotalWeightage = @TotalWeightage " +
-                "WHERE Id = @Id";
-            
-            SqlCommand command = new SqlCommand(query, Program.connection);
-            command.Parameters.AddWithValue("@Id", id);
-            command.Parameters.AddWithValue("@Title", textBox1.Text);
-            command.Parameters.AddWithValue("@TotalMarks", textBox2.Text);    
-            command.Parameters.AddWithValue("@TotalWeightage", textBox3.Text);
-            command.ExecuteNonQuery();
-            
-            Program.connection.Close();
-            loadData();
-
-
-        }
-
         private void Cell_Click(object sender, DataGridViewCellEventArgs e)
         {
             var row = dataGridView1.SelectedRows[0];
@@ -82,33 +32,52 @@ namespace DBProject
             textBox3.Text = row.Cells[4].Value.ToString();
             UtilDL.showUD_Btns(addBtn, updateBtn, deleteBtn, udBtn);
         }
-        private void loadData()
+        private void Add_Data(object sender, EventArgs e)
         {
+            if (BoxIsNull()) {
+                MsgDL.TextBoxEmptyError();
+                return;
+            }
             Program.connection.Open();
-            string query = "SELECT * FROM Assessment";
-            SqlDataAdapter adapter = new SqlDataAdapter(query, Program.connection);
-            DataTable table = new DataTable();
-            adapter.Fill(table);
-            dataGridView1.DataSource = table;
+            string query = "INSERT INTO Assessment values (@Title, @DateCreated, @TotalMarks, @TotalWeightage)";
+            
+            SqlCommand command = new SqlCommand(query, Program.connection);
+            command.Parameters.AddWithValue("@DateCreated", DateTime.Now);
+            loadParameters(command);
+            command.ExecuteNonQuery();
+            
             Program.connection.Close();
+            MainDL.LoadDataOnGridTable(dataGridView1, "Assessment");
         }
 
+        private void Update_Data(object sender, EventArgs e)
+        {
+            if (BoxIsNull()) {
+                MsgDL.TextBoxEmptyError();
+                return;
+            }
+            int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);   
+            Program.connection.Open();
+            string query = $"UPDATE Assessment SET Title = @Title, TotalMarks = @TotalMarks, TotalWeightage = @TotalWeightage WHERE Id = {id}";
+            
+            SqlCommand command = new SqlCommand(query, Program.connection);
+            loadParameters(command);
+            command.ExecuteNonQuery();
+            
+            Program.connection.Close();
+            MainDL.LoadDataOnGridTable(dataGridView1, "Assessment");
+        }
         private void Delete_Data(object sender, EventArgs e)
         {
-            if (BoxIsNull())
-            {
+            if (BoxIsNull()) {
                 MsgDL.TextBoxEmptyError();
                 return;
             }
             int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
-            Program.connection.Open();
-            string query = "DELETE FROM Assessment WHERE Id = @Id";
-            SqlCommand command = new SqlCommand(query, Program.connection);
-            command.Parameters.AddWithValue("@Id", id);
-            command.ExecuteNonQuery();
-            Program.connection.Close();
-            loadData();
+            
+            QueryDL.DeleteFromTable("Assessment", "Id", id);
 
+            MainDL.LoadDataOnGridTable(dataGridView1, "Assessment");
         }
 
         private void Open_Componenet_Form(object sender, EventArgs e)
@@ -117,7 +86,12 @@ namespace DBProject
             form.StartPosition = FormStartPosition.CenterScreen;
             form.Show();
         }
-
+        private void loadParameters(SqlCommand cmd)
+        {
+            cmd.Parameters.AddWithValue("@Title", textBox1.Text);
+            cmd.Parameters.AddWithValue("@TotalMarks", textBox2.Text);
+            cmd.Parameters.AddWithValue("@TotalWeightage", textBox3.Text);
+        }
         private void udBtn_Click(object sender, EventArgs e)
         {
             UtilDL.hideUD_Btns(addBtn, updateBtn, deleteBtn, udBtn);
