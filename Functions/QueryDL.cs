@@ -11,6 +11,14 @@ namespace DBProject
 {
     internal class QueryDL
     {
+        public static void AddInTable(string query, SqlCommand cmd)
+        {
+            Program.connection.Open();
+
+            cmd.ExecuteNonQuery();
+
+            Program.connection.Close();
+        }
         public static void DeleteFromTable(string table, string columnName, int idToDelete)
         {
             Program.connection.Open();
@@ -59,11 +67,11 @@ namespace DBProject
 
             return id;
         }
-        public static void LoadComboBox(ComboBox box, string field, string table)
+        public static void LoadComboBox(ComboBox box, string field, string table, string subQuery = "")
         {
             box.Items.Clear();
             Program.connection.Open();
-            string query = $"SELECT {field} FROM {table}";
+            string query = $"SELECT {field} FROM {table} {subQuery}";    // subQuery is optional
             SqlCommand command = new SqlCommand(query, Program.connection);
             SqlDataReader data = command.ExecuteReader();
             while (data.Read())
@@ -71,6 +79,16 @@ namespace DBProject
                 box.Items.Add(data[0]);
             }
             Program.connection.Close();
+        }
+        public static float GetField(string query)
+        {
+            Program.connection.Open();
+
+            SqlCommand command = new SqlCommand(query, Program.connection);
+            float field = Convert.ToInt32(command.ExecuteScalar());
+
+            Program.connection.Close();
+            return field;
         }
     }
 }

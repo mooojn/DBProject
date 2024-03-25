@@ -44,16 +44,13 @@ namespace DBProject
                 return;
             }
             Program.connection.Open();
-
             string query = "INSERT INTO Student VALUES (@F_Name, @L_Name, @Contact, @Email, @RegNo, @Status)";
             
             SqlCommand cmd = new SqlCommand(query, Program.connection);
             getParameters(cmd);
-            
             cmd.ExecuteNonQuery();
 
             Program.connection.Close();
-
             MainDL.LoadDataOnGridTable(dataGridView1, "Student");
         }
         private void Update_Student(object sender, EventArgs e)
@@ -63,15 +60,12 @@ namespace DBProject
                 return;
             }
             Program.connection.Open();
-
             int id = MainDL.GetIdFromGridTable(dataGridView1);
-
             string query = "UPDATE Student SET FirstName = @F_Name, LastName = @L_Name, Contact = @Contact, Email = @Email, RegistrationNumber = @RegNo, Status = @Status WHERE Id = @id";
             
             SqlCommand cmd = new SqlCommand(query, Program.connection);    
             cmd.Parameters.AddWithValue("@id", id);
             getParameters(cmd);  // gets all the other parameters
-            
             cmd.ExecuteNonQuery();
             
             Program.connection.Close();
