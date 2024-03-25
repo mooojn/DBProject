@@ -45,7 +45,7 @@ namespace DBProject
             }
             Program.connection.Open();
 
-            string query = "INSERT INTO Student VALUES (@F_Name, @L_Name, @Contact, @Email, @RegNo, 1)";
+            string query = "INSERT INTO Student VALUES (@F_Name, @L_Name, @Contact, @Email, @RegNo, @Status)";
             
             SqlCommand cmd = new SqlCommand(query, Program.connection);
             getParameters(cmd);
@@ -66,7 +66,7 @@ namespace DBProject
 
             int id = MainDL.GetIdFromGridTable(dataGridView1);
 
-            string query = "UPDATE Student SET FirstName = @F_Name, LastName = @L_Name, Contact = @Contact, Email = @Email, RegistrationNumber = @RegNo WHERE Id = @id";
+            string query = "UPDATE Student SET FirstName = @F_Name, LastName = @L_Name, Contact = @Contact, Email = @Email, RegistrationNumber = @RegNo, Status = @Status WHERE Id = @id";
             
             SqlCommand cmd = new SqlCommand(query, Program.connection);    
             cmd.Parameters.AddWithValue("@id", id);
@@ -97,6 +97,7 @@ namespace DBProject
             cmd.Parameters.AddWithValue("@Contact", stdContactBox.Text);
             cmd.Parameters.AddWithValue("@Email", stdEmailBox.Text);
             cmd.Parameters.AddWithValue("@RegNo", stdRegNoBox.Text);
+            cmd.Parameters.AddWithValue("@Status", status.Checked ? 5 : 6);
         }
         // if any of the textboxes are empty, return true
         private bool TextBoxHasNull()
@@ -120,6 +121,11 @@ namespace DBProject
             form.Show();
         }
         private void addStudentPanel_Paint(object sender, PaintEventArgs e)
+        {
+            
+        }
+
+        private void status_CheckedChanged(object sender, EventArgs e)
         {
             
         }
