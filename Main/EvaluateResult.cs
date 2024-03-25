@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using System.Security.Cryptography;
 
 namespace DBProject
 {
@@ -18,26 +19,39 @@ namespace DBProject
         {
             InitializeComponent();
         }
-
         private void EvaluateResult_Load(object sender, EventArgs e)
         {
             createCol();
+            loadData();
+            QueryDL.LoadComboBox(StudentComboBox, "FirstName", "Student");
+            QueryDL.LoadComboBox(AssessmentComboBox, "Title", "Assessment");
+        }
+        private void Add_Data(object sender, EventArgs e)
+        {
+            if (BoxIsNull())
+            {
+                MsgDL.TextBoxEmptyError();
+                return;
+            }
+            int stdId = QueryDL.GetIdFromTableUsingString("Id", "Student", "FirstName", StudentComboBox.Text);
+            int assessmentId = QueryDL.GetIdFromTableUsingString("Id", "AssessmentComponent", "Name", ComponentComboBox.Text);
+            int rubricId = QueryDL.GetIdFromTableUsingString("Id", "RubricLevel", "MeasurementLevel", RubricLevelComboBox.Text);
+
+            Program.connection.Open();
+            string query = "INSERT INTO StudentResult VALUES (@StudentId, @AssessmentComponentId, @RubricMeasurementId, @EvaluationDate)";
+            SqlCommand command = new SqlCommand(query, Program.connection);
+
+            command.Parameters.AddWithValue("@StudentId", stdId);
+            command.Parameters.AddWithValue("@AssessmentComponentId", assessmentId);
+            command.Parameters.AddWithValue("@RubricMeasurementId", rubricId);
+            command.Parameters.AddWithValue("@EvaluationDate", dateTimePicker1.Value);
+
+            command.ExecuteNonQuery();
+
+
+            Program.connection.Close();
 
             loadData();
-
-            loadComboBox(StudentComboBox, "FirstName", "Student");
-
-            loadComboBox(AssessmentComboBox, "Title", "Assessment");
-
-        }
-        private void createCol()
-        {
-            dataGridView1.Columns.Add("Student", "Student");
-            dataGridView1.Columns.Add("Assessment", "Assessment");
-            dataGridView1.Columns.Add("Rubric Level", "Rubric Level");
-
-            dataGridView1.Columns.Add("Total Marks", "Total Marks");
-            dataGridView1.Columns.Add("Obtained Marks", "Obtained Marks");
         }
         private void loadData()
         {
@@ -67,102 +81,39 @@ namespace DBProject
                 }
             }
         }
+        private void createCol()
+        {
+            dataGridView1.Columns.Add("Student", "Student");
+            dataGridView1.Columns.Add("Assessment", "Assessment");
+            dataGridView1.Columns.Add("Rubric Level", "Rubric Level");
+
+            dataGridView1.Columns.Add("Total Marks", "Total Marks");
+            dataGridView1.Columns.Add("Obtained Marks", "Obtained Marks");
+        }
         private float CalculateMarks(int assesmentId, int rubricId)
         {
-            string query1 = $"SELECT TotalMarks FROM AssessmentComponent WHERE Id = {assesmentId}";
-            float componentMarks = getField(query1);
-
-            string query2 = $"SELECT MAX(MeasurementLevel) FROM RubricLevel WHERE RubricId = (SELECT RubricId FROM RubricLevel WHERE Id = {rubricId})";
-            float maxRubricLevel = getField(query2);
-
-            string query3 = $"SELECT MeasurementLevel FROM RubricLevel WHERE Id = {rubricId}";
-            float currentRubricLevel = getField(query3);
+            float componentMarks = QueryDL.GetField($"SELECT TotalMarks FROM AssessmentComponent WHERE Id = {assesmentId}");
+            float maxRubricLevel = QueryDL.GetField($"SELECT MAX(MeasurementLevel) FROM RubricLevel WHERE RubricId = (SELECT RubricId FROM RubricLevel WHERE Id = {rubricId})");
+            float currentRubricLevel = QueryDL.GetField($"SELECT MeasurementLevel FROM RubricLevel WHERE Id = {rubricId}");
 
             return (currentRubricLevel / maxRubricLevel) * componentMarks;
         }
-        private float getField(string query)
-        {
-            Program.connection.Open();
-
-            SqlCommand command = new SqlCommand(query, Program.connection);
-            float field = Convert.ToInt32(command.ExecuteScalar());
-
-            Program.connection.Close();
-            return field;
-        }
-        private void loadComboBox(ComboBox ComboBoxToUse, string value, string table)
-        {
-            ComboBoxToUse.Items.Clear();
-            Program.connection.Open();
-            string query = $"SELECT {value} FROM {table}";
-            SqlCommand command = new SqlCommand(query, Program.connection);
-            SqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                ComboBoxToUse.Items.Add(reader[0]);
-
-            }
-            Program.connection.Close();
-        }
-        private void loadComboBoxWhere(ComboBox ComboBoxToUse, string value, string table, string subQuery)
-        {
-            ComboBoxToUse.Items.Clear();
-            Program.connection.Open();
-            string query = $"SELECT {value} FROM {table} WHERE {subQuery}";
-            SqlCommand command = new SqlCommand(query, Program.connection);
-            SqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                ComboBoxToUse.Items.Add(reader[0]);
-
-            }
-            Program.connection.Close();
-        }
-
-        private void Add_Data(object sender, EventArgs e)
-        {
-            if (BoxIsNull())
-            {
-                MsgDL.TextBoxEmptyError();
-                return;
-            }
-            int stdId = QueryDL.GetIdFromTableUsingString("Id", "Student", "FirstName", StudentComboBox.Text);
-            int assessmentId = QueryDL.GetIdFromTableUsingString("Id", "AssessmentComponent", "Name", ComponentComboBox.Text);
-            int rubricId = QueryDL.GetIdFromTableUsingString("Id", "RubricLevel", "MeasurementLevel", RubricLevelComboBox.Text);
-
-            Program.connection.Open();
-            string query = "INSERT INTO StudentResult VALUES (@StudentId, @AssessmentComponentId, @RubricMeasurementId, @EvaluationDate)";
-            SqlCommand command = new SqlCommand(query, Program.connection);
-
-            command.Parameters.AddWithValue("@StudentId", stdId);
-            command.Parameters.AddWithValue("@AssessmentComponentId", assessmentId);
-            command.Parameters.AddWithValue("@RubricMeasurementId", rubricId);
-            command.Parameters.AddWithValue("@EvaluationDate", dateTimePicker1.Value);
-
-            command.ExecuteNonQuery();
-
-
-            Program.connection.Close();
-
-            loadData();
-        }
-
         private void AssessmentComboBox_SelectedValueChanged(object sender, EventArgs e)
         {
-            string subQuery = $"AssessmentId = (SELECT Id FROM Assessment WHERE Title = '{AssessmentComboBox.Text}')";
-            loadComboBoxWhere(ComponentComboBox, "Name", "AssessmentComponent", subQuery);
+            string subQuery = $" WHERE AssessmentId = (SELECT Id FROM Assessment WHERE Title = '{AssessmentComboBox.Text}')";
+            QueryDL.LoadComboBox(ComponentComboBox, "Name", "AssessmentComponent", subQuery);
         }
 
         private void ComponentComboBox_SelectedValueChanged(object sender, EventArgs e)
         {
-            string subQuery = $"Id = (SELECT RubricId FROM AssessmentComponent WHERE Name = '{ComponentComboBox.Text}')";
-            loadComboBoxWhere(RubricDetailComboBox, "Details", "Rubric", subQuery);
+            string subQuery = $" WHERE Id = (SELECT RubricId FROM AssessmentComponent WHERE Name = '{ComponentComboBox.Text}')";
+            QueryDL.LoadComboBox(RubricDetailComboBox, "Details", "Rubric", subQuery);
         }
         private void RubricDetailComboBox_SelectedValueChanged(object sender, EventArgs e)
         {
 
-            string subQuery = $"RubricId = (SELECT Id FROM Rubric WHERE Details = '{RubricDetailComboBox.Text}')";
-            loadComboBoxWhere(RubricLevelComboBox, "MeasurementLevel", "RubricLevel", subQuery);
+            string subQuery = $" WHERE RubricId = (SELECT Id FROM Rubric WHERE Details = '{RubricDetailComboBox.Text}')";
+            QueryDL.LoadComboBox(RubricLevelComboBox, "MeasurementLevel", "RubricLevel", subQuery);
         }
         private bool BoxIsNull()
         {
