@@ -42,7 +42,6 @@ namespace DBProject
             
             SqlCommand command = new SqlCommand(query, Program.connection);
             loadParameters(command);
-            command.ExecuteNonQuery();
 
             QueryDL.ExecuteCommand(command);
 
