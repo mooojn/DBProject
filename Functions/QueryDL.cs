@@ -33,7 +33,7 @@ namespace DBProject
             }
             Program.connection.Close();
         }
-        public static int GetIdFromTableUsingString(string valueToGet, string table, string columnName, string value)
+        public static int GetIdFromTable(string valueToGet, string table, string columnName, string value)
         {
             int id = -1;
             Program.connection.Open();
@@ -50,25 +50,6 @@ namespace DBProject
             Program.connection.Close();
             return id;
 
-        }
-        public static int GetIdFromTable(string valueToGet, string table)
-        {
-            int id = -1;
-
-            Program.connection.Open();
-            string query = $"SELECT {valueToGet} FROM {table}";
-
-            SqlCommand cmd = new SqlCommand(query, Program.connection);
-            SqlDataReader reader = cmd.ExecuteReader();
-
-
-            while (reader.Read())
-            {
-                id = reader.GetInt32(0);
-            }
-            Program.connection.Close();
-
-            return id;
         }
         public static void LoadComboBox(ComboBox box, string field, string table, string subQuery = "")
         {

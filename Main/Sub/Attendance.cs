@@ -51,9 +51,9 @@ namespace DBProject
             }
             insertIntoclassAttendance();
             // getting the ids
-            int attendanceId = QueryDL.GetIdFromTable("MAX(Id)", "ClassAttendance");
-            int stdId = QueryDL.GetIdFromTableUsingString("Id", "Student", "RegistrationNumber", RegNoComboBox.Text);
-            int status = QueryDL.GetIdFromTableUsingString("Lookupid", "Lookup", "Name", StatusComboBox.Text);
+            int attendanceId = QueryDL.GetIdFromTable("MAX(Id)", "ClassAttendance", "1", "1");   // 1, 1 is extra to make the function work
+            int stdId = QueryDL.GetIdFromTable("Id", "Student", "RegistrationNumber", RegNoComboBox.Text);
+            int status = QueryDL.GetIdFromTable("Lookupid", "Lookup", "Name", StatusComboBox.Text);
             Program.connection.Open();
 
             string query = $"INSERT INTO StudentAttendance VALUES ({attendanceId}, {stdId}, {status})";

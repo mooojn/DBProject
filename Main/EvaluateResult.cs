@@ -33,9 +33,9 @@ namespace DBProject
                 MsgDL.TextBoxEmptyError();
                 return;
             }
-            int stdId = QueryDL.GetIdFromTableUsingString("Id", "Student", "FirstName", StudentComboBox.Text);
-            int assessmentId = QueryDL.GetIdFromTableUsingString("Id", "AssessmentComponent", "Name", ComponentComboBox.Text);
-            int rubricId = QueryDL.GetIdFromTableUsingString("Id", "RubricLevel", "MeasurementLevel", RubricLevelComboBox.Text);
+            int stdId = QueryDL.GetIdFromTable("Id", "Student", "FirstName", StudentComboBox.Text);
+            int assessmentId = QueryDL.GetIdFromTable("Id", "AssessmentComponent", "Name", ComponentComboBox.Text);
+            int rubricId = QueryDL.GetIdFromTable("Id", "RubricLevel", "MeasurementLevel", RubricLevelComboBox.Text);
 
             Program.connection.Open();
             string query = "INSERT INTO StudentResult VALUES (@StudentId, @AssessmentComponentId, @RubricMeasurementId, @EvaluationDate)";

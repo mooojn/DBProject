@@ -42,8 +42,8 @@ namespace DBProject
                 MsgDL.TextBoxEmptyError();
                 return;
             }
-            int assessmentId = QueryDL.GetIdFromTableUsingString("Id", "Assessment", "Title", AssessmentNameComboBox.Text);
-            int rubricId = QueryDL.GetIdFromTableUsingString("Id", "Rubric", "Details", RubricNameComboBox.Text);
+            int assessmentId = QueryDL.GetIdFromTable("Id", "Assessment", "Title", AssessmentNameComboBox.Text);
+            int rubricId = QueryDL.GetIdFromTable("Id", "Rubric", "Details", RubricNameComboBox.Text);
 
             Program.connection.Open();
             string query = $"INSERT INTO AssessmentComponent VALUES (@Name, {rubricId}, @TotalMarks, @DateCreated, @DateUpdated, {assessmentId})";
@@ -63,8 +63,8 @@ namespace DBProject
                 return;
             }
             int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
-            int assessmentId = QueryDL.GetIdFromTableUsingString("Id", "Assessment", "Title", AssessmentNameComboBox.Text);
-            int rubricId = QueryDL.GetIdFromTableUsingString("Id", "Rubric", "Details", RubricNameComboBox.Text);
+            int assessmentId = QueryDL.GetIdFromTable("Id", "Assessment", "Title", AssessmentNameComboBox.Text);
+            int rubricId = QueryDL.GetIdFromTable("Id", "Rubric", "Details", RubricNameComboBox.Text);
             
             Program.connection.Open();
             string query = $"UPDATE AssessmentComponent SET Name = @Name, RubricId = {rubricId}, TotalMarks = @TotalMarks, DateUpdated = @DateUpdated, AssessmentId = {assessmentId} WHERE Id = {id}";
