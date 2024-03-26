@@ -10,7 +10,7 @@ namespace DBProject
 {
     internal static class Program
     {
-        public static string connectionString = "Data Source=DESKTOP-AJHCE58\\MOOOJN;Initial Catalog=ProjectB;Integrated Security=True";
+        public static string connectionString = "Data Source=localhost\\MOOOJN;Initial Catalog=ProjectB;Integrated Security=True";
         public static SqlConnection connection = new SqlConnection(connectionString);
         /// <summary>
         /// The main entry point for the application.
