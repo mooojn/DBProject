@@ -28,5 +28,17 @@ namespace DBProject
             // as id is always the first column
             return Convert.ToInt32(dataGrid.SelectedRows[0].Cells[0].Value);
         }
+        public static bool IsAnyBoxNull(Control container)
+        {
+            foreach (Control control in container.Controls) {
+                if (control is TextBox textBox && string.IsNullOrEmpty(textBox.Text)) {
+                    return true;
+                }
+                else if (control is ComboBox comboBox && string.IsNullOrEmpty(comboBox.Text)) {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
