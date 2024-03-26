@@ -49,7 +49,8 @@ namespace DBProject
             SqlCommand command = new SqlCommand(query, Program.connection);
             command.Parameters.AddWithValue("@DateCreated", DateTime.Now);
             loadParameters(command);
-            command.ExecuteNonQuery();
+            
+            QueryDL.ExecuteCommand(command);
             
             MainDL.LoadDataOnGridTable(dataGridView1, "AssessmentComponent");
         }
