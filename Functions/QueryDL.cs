@@ -22,12 +22,15 @@ namespace DBProject
         public static void DeleteFromTable(string table, string columnName, int idToDelete)
         {
             Program.connection.Open();
-
             string query = $"DELETE FROM {table} WHERE {columnName} = {idToDelete}";
 
             SqlCommand cmd = new SqlCommand(query, Program.connection);
-            cmd.ExecuteNonQuery();
-
+            try {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception err) {
+                MessageBox.Show(err.Message);
+            }
             Program.connection.Close();
         }
         public static int GetIdFromTableUsingString(string valueToGet, string table, string columnName, string value)
