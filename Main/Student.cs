@@ -43,14 +43,13 @@ namespace DBProject
                 MsgDL.TextBoxEmptyError();
                 return;
             }
-            Program.connection.Open();
             string query = "INSERT INTO Student VALUES (@F_Name, @L_Name, @Contact, @Email, @RegNo, @Status)";
             
-            SqlCommand cmd = new SqlCommand(query, Program.connection);
-            getParameters(cmd);
-            cmd.ExecuteNonQuery();
+            SqlCommand command = new SqlCommand(query, Program.connection);
+            loadParameters(command);
 
-            Program.connection.Close();
+            QueryDL.ExecuteCommand(command);
+
             MainDL.LoadDataOnGridTable(dataGridView1, "Student");
         }
         private void Update_Student(object sender, EventArgs e)
@@ -60,16 +59,15 @@ namespace DBProject
                 MsgDL.TextBoxEmptyError();
                 return;
             }
-            Program.connection.Open();
             int id = MainDL.GetIdFromGridTable(dataGridView1);
             string query = "UPDATE Student SET FirstName = @F_Name, LastName = @L_Name, Contact = @Contact, Email = @Email, RegistrationNumber = @RegNo, Status = @Status WHERE Id = @id";
             
-            SqlCommand cmd = new SqlCommand(query, Program.connection);    
-            cmd.Parameters.AddWithValue("@id", id);
-            getParameters(cmd);  // gets all the other parameters
-            cmd.ExecuteNonQuery();
+            SqlCommand command = new SqlCommand(query, Program.connection);    
+            command.Parameters.AddWithValue("@id", id);
+            loadParameters(command);  // gets all the other parameters
             
-            Program.connection.Close();
+            QueryDL.ExecuteCommand(command);
+
             MainDL.LoadDataOnGridTable(dataGridView1, "Student");
         }
         private void Delete_Student(object sender, EventArgs e)
@@ -86,7 +84,7 @@ namespace DBProject
 
             MainDL.LoadDataOnGridTable(dataGridView1, "Student");
         }
-        private void getParameters(SqlCommand cmd)
+        private void loadParameters(SqlCommand cmd)
         {
             cmd.Parameters.AddWithValue("@F_Name", stdFirstNameBox.Text);
             cmd.Parameters.AddWithValue("@L_Name", stdLastNameBox.Text);

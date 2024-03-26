@@ -41,14 +41,13 @@ namespace DBProject.Main
                 MsgDL.TextBoxEmptyError();
                 return;
             }
-            Program.connection.Open();
             string query = $"INSERT INTO RubricLevel VALUES ({subQuery}, @Details, @MeasurementLevel)";
             
-            SqlCommand command = new SqlCommand(query, Program.connection);
-            loadParameters(command);
-            command.ExecuteNonQuery();
+            SqlCommand cmd = new SqlCommand(query, Program.connection);
+            loadParameters(cmd);
             
-            Program.connection.Close();
+            QueryDL.ExecuteCommand(cmd);
+
             MainDL.LoadDataOnGridTable(dataGridView1, "RubricLevel");
         }
         private void Update_Data(object sender, EventArgs e)
@@ -59,14 +58,13 @@ namespace DBProject.Main
                 return;
             }
             int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
-            Program.connection.Open();
             string query = $"UPDATE RubricLevel SET RubricId = ({subQuery}, Details = @Details, MeasurementLevel = @MeasurementLevel WHERE Id = {id}";
             
-            SqlCommand command = new SqlCommand(query, Program.connection);
-            loadParameters(command);
-            command.ExecuteNonQuery();
+            SqlCommand cmd = new SqlCommand(query, Program.connection);
+            loadParameters(cmd);
             
-            Program.connection.Close();
+            QueryDL.ExecuteCommand(cmd);
+
             MainDL.LoadDataOnGridTable(dataGridView1, "RubricLevel");
         }
         private void Delete_Data(object sender, EventArgs e)

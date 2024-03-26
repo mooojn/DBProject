@@ -44,16 +44,13 @@ namespace DBProject
             }
             int assessmentId = QueryDL.GetIdFromTable("Id", "Assessment", "Title", AssessmentNameComboBox.Text);
             int rubricId = QueryDL.GetIdFromTable("Id", "Rubric", "Details", RubricNameComboBox.Text);
-
-            Program.connection.Open();
             string query = $"INSERT INTO AssessmentComponent VALUES (@Name, {rubricId}, @TotalMarks, @DateCreated, @DateUpdated, {assessmentId})";
             
-            SqlCommand cmd = new SqlCommand(query, Program.connection);
-            cmd.Parameters.AddWithValue("@DateCreated", DateTime.Now);
-            loadParameters(cmd);
-            cmd.ExecuteNonQuery();
+            SqlCommand command = new SqlCommand(query, Program.connection);
+            command.Parameters.AddWithValue("@DateCreated", DateTime.Now);
+            loadParameters(command);
+            command.ExecuteNonQuery();
             
-            Program.connection.Close();
             MainDL.LoadDataOnGridTable(dataGridView1, "AssessmentComponent");
         }
         private void Update_Data(object sender, EventArgs e)
@@ -65,15 +62,13 @@ namespace DBProject
             int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
             int assessmentId = QueryDL.GetIdFromTable("Id", "Assessment", "Title", AssessmentNameComboBox.Text);
             int rubricId = QueryDL.GetIdFromTable("Id", "Rubric", "Details", RubricNameComboBox.Text);
-            
-            Program.connection.Open();
             string query = $"UPDATE AssessmentComponent SET Name = @Name, RubricId = {rubricId}, TotalMarks = @TotalMarks, DateUpdated = @DateUpdated, AssessmentId = {assessmentId} WHERE Id = {id}";
 
-            SqlCommand cmd = new SqlCommand(query, Program.connection);
-            loadParameters(cmd);
-            cmd.ExecuteNonQuery();
+            SqlCommand command = new SqlCommand(query, Program.connection);
+            loadParameters(command);
+            
+            QueryDL.ExecuteCommand(command);
 
-            Program.connection.Close();
             MainDL.LoadDataOnGridTable(dataGridView1, "AssessmentComponent");
         }
         private void Delete_Data(object sender, EventArgs e)
@@ -89,11 +84,11 @@ namespace DBProject
 
             MainDL.LoadDataOnGridTable(dataGridView1, "AssessmentComponent");
         }
-        private void loadParameters(SqlCommand cmd)
+        private void loadParameters(SqlCommand command)
         {
-            cmd.Parameters.AddWithValue("@Name", textBox1.Text);
-            cmd.Parameters.AddWithValue("@TotalMarks", textBox2.Text);
-            cmd.Parameters.AddWithValue("@DateUpdated", DateTime.Now);
+            command.Parameters.AddWithValue("@Name", textBox1.Text);
+            command.Parameters.AddWithValue("@TotalMarks", textBox2.Text);
+            command.Parameters.AddWithValue("@DateUpdated", DateTime.Now);
         }
         private void udBtn_Click(object sender, EventArgs e)
         {

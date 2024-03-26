@@ -36,20 +36,15 @@ namespace DBProject
             int stdId = QueryDL.GetIdFromTable("Id", "Student", "FirstName", StudentComboBox.Text);
             int assessmentId = QueryDL.GetIdFromTable("Id", "AssessmentComponent", "Name", ComponentComboBox.Text);
             int rubricId = QueryDL.GetIdFromTable("Id", "RubricLevel", "MeasurementLevel", RubricLevelComboBox.Text);
-
-            Program.connection.Open();
             string query = "INSERT INTO StudentResult VALUES (@StudentId, @AssessmentComponentId, @RubricMeasurementId, @EvaluationDate)";
+            
             SqlCommand command = new SqlCommand(query, Program.connection);
-
             command.Parameters.AddWithValue("@StudentId", stdId);
             command.Parameters.AddWithValue("@AssessmentComponentId", assessmentId);
             command.Parameters.AddWithValue("@RubricMeasurementId", rubricId);
             command.Parameters.AddWithValue("@EvaluationDate", dateTimePicker1.Value);
 
-            command.ExecuteNonQuery();
-
-
-            Program.connection.Close();
+            QueryDL.ExecuteCommand(command);
 
             loadData();
         }
@@ -92,9 +87,9 @@ namespace DBProject
         }
         private float CalculateMarks(int assesmentId, int rubricId)
         {
-            float componentMarks = QueryDL.GetField($"SELECT TotalMarks FROM AssessmentComponent WHERE Id = {assesmentId}");
-            float maxRubricLevel = QueryDL.GetField($"SELECT MAX(MeasurementLevel) FROM RubricLevel WHERE RubricId = (SELECT RubricId FROM RubricLevel WHERE Id = {rubricId})");
-            float currentRubricLevel = QueryDL.GetField($"SELECT MeasurementLevel FROM RubricLevel WHERE Id = {rubricId}");
+            float componentMarks = QueryDL.GetFloatField($"SELECT TotalMarks FROM AssessmentComponent WHERE Id = {assesmentId}");
+            float maxRubricLevel = QueryDL.GetFloatField($"SELECT MAX(MeasurementLevel) FROM RubricLevel WHERE RubricId = (SELECT RubricId FROM RubricLevel WHERE Id = {rubricId})");
+            float currentRubricLevel = QueryDL.GetFloatField($"SELECT MeasurementLevel FROM RubricLevel WHERE Id = {rubricId}");
 
             return (currentRubricLevel / maxRubricLevel) * componentMarks;
         }

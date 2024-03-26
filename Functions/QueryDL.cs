@@ -11,12 +11,16 @@ namespace DBProject
 {
     internal class QueryDL
     {
-        public static void AddInTable(string query, SqlCommand cmd)
+        public static void ExecuteCommand(SqlCommand cmd)
         {
             Program.connection.Open();
-
-            cmd.ExecuteNonQuery();
-
+            try {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
             Program.connection.Close();
         }
         public static void DeleteFromTable(string table, string columnName, int idToDelete)
@@ -25,13 +29,10 @@ namespace DBProject
             string query = $"DELETE FROM {table} WHERE {columnName} = {idToDelete}";
 
             SqlCommand cmd = new SqlCommand(query, Program.connection);
-            try {
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception err) {
-                MessageBox.Show(err.Message);
-            }
+            
             Program.connection.Close();
+            
+            ExecuteCommand(cmd);
         }
         public static int GetIdFromTable(string valueToGet, string table, string columnName, string value)
         {
@@ -64,7 +65,7 @@ namespace DBProject
             }
             Program.connection.Close();
         }
-        public static float GetField(string query)
+        public static float GetFloatField(string query)
         {
             Program.connection.Open();
 

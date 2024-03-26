@@ -38,15 +38,14 @@ namespace DBProject
                 MsgDL.TextBoxEmptyError();
                 return;
             }
-            Program.connection.Open();
             string query = "INSERT INTO Rubric values (@Details, (SELECT Id FROM Clo WHERE Name = @CloId))";
             
             SqlCommand command = new SqlCommand(query, Program.connection);
-            
             loadParameters(command);
             command.ExecuteNonQuery();
-            
-            Program.connection.Close();
+
+            QueryDL.ExecuteCommand(command);
+
             MainDL.LoadDataOnGridTable(dataGridView1, "Rubric");
         }
         private void Update_Data(object sender, EventArgs e)
@@ -56,17 +55,14 @@ namespace DBProject
                 MsgDL.TextBoxEmptyError();
                 return;
             }
-            Program.connection.Open();
             int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
-
             string query = $"UPDATE Rubric SET Details = @Details, CloId = @CloId WHERE Id = {id}";
             
             SqlCommand command = new SqlCommand(query, Program.connection);
-            
             loadParameters(command);
-            command.ExecuteNonQuery();
-            
-            Program.connection.Close();
+
+            QueryDL.ExecuteCommand(command);
+
             MainDL.LoadDataOnGridTable(dataGridView1, "Rubric");
         }
 

@@ -32,24 +32,20 @@ namespace DBProject
             textBox1.Text = row.Cells[1].Value.ToString();
             UtilDL.showUD_Btns(addBtn, updateBtn, deleteBtn, udBtn);
         }
-
         private void Add_Data(object sender, EventArgs e)
         {
             if (MainDL.IsAnyBoxNull(this.panel1))
             {
                 MsgDL.TextBoxEmptyError();
                 return;
-            }
-            Program.connection.Open();
-            
+            }            
             string query = "INSERT INTO CLO VALUES (@Name, @DateCreated, @DateCreated)";   
 
-            SqlCommand cmd = new SqlCommand(query, Program.connection);
-            cmd.Parameters.AddWithValue("@Name", textBox1.Text);
-            cmd.Parameters.AddWithValue("@DateCreated", DateTime.Now);
-            cmd.ExecuteNonQuery();
+            SqlCommand command = new SqlCommand(query, Program.connection);
+            command.Parameters.AddWithValue("@Name", textBox1.Text);
+            command.Parameters.AddWithValue("@DateCreated", DateTime.Now);
 
-            Program.connection.Close();
+            QueryDL.ExecuteCommand(command);
 
             MainDL.LoadDataOnGridTable(dataGridView1, "CLO");
         }
@@ -60,18 +56,16 @@ namespace DBProject
                 MsgDL.TextBoxEmptyError();
                 return;
             }
-            Program.connection.Open();
 
             string query = "UPDATE CLO SET Name = @NewName, DateUpdated = @NewTime WHERE Id = @Id";
             int id = MainDL.GetIdFromGridTable(dataGridView1);
 
-            SqlCommand cmd = new SqlCommand(query, Program.connection);
-            cmd.Parameters.AddWithValue("@Id", id);
-            cmd.Parameters.AddWithValue("@NewName", textBox1.Text);
-            cmd.Parameters.AddWithValue("@NewTime", DateTime.Now);
-            cmd.ExecuteNonQuery();
+            SqlCommand command = new SqlCommand(query, Program.connection);
+            command.Parameters.AddWithValue("@Id", id);
+            command.Parameters.AddWithValue("@NewName", textBox1.Text);
+            command.Parameters.AddWithValue("@NewTime", DateTime.Now);
 
-            Program.connection.Close();
+            QueryDL.ExecuteCommand(command);
 
             MainDL.LoadDataOnGridTable(dataGridView1, "CLO");
         }
