@@ -34,7 +34,7 @@ namespace DBProject
         }
         private void Add_Data(object sender, EventArgs e)
         {
-            if (BoxIsNull()) {
+            if (MainDL.IsAnyBoxNull(this.panel1)) {
                 MsgDL.TextBoxEmptyError();
                 return;
             }
@@ -52,7 +52,7 @@ namespace DBProject
 
         private void Update_Data(object sender, EventArgs e)
         {
-            if (BoxIsNull()) {
+            if (MainDL.IsAnyBoxNull(this.panel1)) {
                 MsgDL.TextBoxEmptyError();
                 return;
             }
@@ -69,7 +69,8 @@ namespace DBProject
         }
         private void Delete_Data(object sender, EventArgs e)
         {
-            if (BoxIsNull()) {
+            if (MainDL.IsAnyBoxNull(this.panel1))
+            {
                 MsgDL.TextBoxEmptyError();
                 return;
             }
@@ -95,12 +96,6 @@ namespace DBProject
         private void udBtn_Click(object sender, EventArgs e)
         {
             UtilDL.hideUD_Btns(addBtn, updateBtn, deleteBtn, udBtn);
-        }
-        private bool BoxIsNull()
-        {
-            if (textBox1.Text == "" || textBox2.Text == "" || textBox3.Text == "")
-                return true;
-            return false;
         }
     }
 }

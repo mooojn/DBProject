@@ -22,11 +22,11 @@ namespace DBProject
         private void Attendance_Load(object sender, EventArgs e)
         {
             QueryDL.LoadComboBox(RegNoComboBox, "RegistrationNumber", "Student");
-            QueryDL.LoadComboBox(StatusComboBox, "TOP 4 *", "Lookup");
+            QueryDL.LoadComboBox(StatusComboBox, "TOP 4 Name", "Lookup");
         }
         private void insertIntoclassAttendance()
         {
-            if (textBoxIsNull())
+            if (MainDL.IsAnyBoxNull(this.panel1))
             {
                 MsgDL.TextBoxEmptyError();
                 return;
@@ -44,7 +44,8 @@ namespace DBProject
 
         private void Save_Attendance(object sender, EventArgs e)
         {
-            if (textBoxIsNull()) {
+            if (MainDL.IsAnyBoxNull(this.panel1))
+            {
                 MsgDL.TextBoxEmptyError();
                 return;
             }
@@ -62,14 +63,6 @@ namespace DBProject
             Program.connection.Close();
             MessageBox.Show("Attendance Marked", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-        private bool textBoxIsNull()
-        {
-            if (RegNoComboBox.Text == "" || StatusComboBox.Text == "") {
-                return true;
-            }
-            return false;
-        }
-
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 

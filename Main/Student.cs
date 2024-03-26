@@ -34,12 +34,12 @@ namespace DBProject
             stdEmailBox.Text = row.Cells[4].Value.ToString();    
             stdRegNoBox.Text = row.Cells[5].Value.ToString();
 
-            MainDL.LoadDataOnGridTable(dataGridView1, "Student");
             UtilDL.showUD_Btns(addBtn, updateBtn, deleteBtn, udBtn);
         }
         private void Add_Student(object sender, EventArgs e)
         {
-            if (TextBoxHasNull()) {
+            if (MainDL.IsAnyBoxNull(this.addStudentPanel))
+            {
                 MsgDL.TextBoxEmptyError();
                 return;
             }
@@ -55,7 +55,8 @@ namespace DBProject
         }
         private void Update_Student(object sender, EventArgs e)
         {
-            if (TextBoxHasNull()) {
+            if (MainDL.IsAnyBoxNull(this.addStudentPanel))
+            {
                 MsgDL.TextBoxEmptyError();
                 return;
             }
@@ -73,7 +74,8 @@ namespace DBProject
         }
         private void Delete_Student(object sender, EventArgs e)
         {
-            if (TextBoxHasNull()) {
+            if (MainDL.IsAnyBoxNull(this.addStudentPanel))
+            {
                 MsgDL.TextBoxEmptyError();
                 return;
             }
@@ -92,17 +94,6 @@ namespace DBProject
             cmd.Parameters.AddWithValue("@Email", stdEmailBox.Text);
             cmd.Parameters.AddWithValue("@RegNo", stdRegNoBox.Text);
             cmd.Parameters.AddWithValue("@Status", status.Checked ? 5 : 6);
-        }
-        // if any of the textboxes are empty, return true
-        private bool TextBoxHasNull()
-        {
-            if (string.IsNullOrEmpty(stdFirstNameBox.Text) || string.IsNullOrEmpty(stdLastNameBox.Text) 
-                || string.IsNullOrEmpty(stdContactBox.Text) 
-                ||string.IsNullOrEmpty(stdEmailBox.Text) || string.IsNullOrEmpty(stdRegNoBox.Text)) 
-            {
-                return true;
-            }
-            return false;
         }
         private void hideUdBtn_Click(object sender, EventArgs e)
         {

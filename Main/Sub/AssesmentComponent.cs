@@ -38,7 +38,7 @@ namespace DBProject
         }
         private void Add_Data(object sender, EventArgs e)
         {
-            if (BoxIsNull()) {
+            if (MainDL.IsAnyBoxNull(this.panel1)) {
                 MsgDL.TextBoxEmptyError();
                 return;
             }
@@ -58,7 +58,7 @@ namespace DBProject
         }
         private void Update_Data(object sender, EventArgs e)
         {
-            if (BoxIsNull()) {
+            if (MainDL.IsAnyBoxNull(this.panel1)) {
                 MsgDL.TextBoxEmptyError();
                 return;
             }
@@ -78,7 +78,8 @@ namespace DBProject
         }
         private void Delete_Data(object sender, EventArgs e)
         {
-            if (BoxIsNull()) {
+            if (MainDL.IsAnyBoxNull(this.panel1))
+            {
                 MsgDL.TextBoxEmptyError();
                 return;
             }
@@ -93,12 +94,6 @@ namespace DBProject
             cmd.Parameters.AddWithValue("@Name", textBox1.Text);
             cmd.Parameters.AddWithValue("@TotalMarks", textBox2.Text);
             cmd.Parameters.AddWithValue("@DateUpdated", DateTime.Now);
-        }
-        private bool BoxIsNull()
-        {
-            if (textBox1.Text == "" || textBox2.Text == "" || AssessmentNameComboBox.Text == "" || RubricNameComboBox.Text == "")
-                return true;
-            return false;
         }
         private void udBtn_Click(object sender, EventArgs e)
         {

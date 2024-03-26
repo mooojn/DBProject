@@ -35,7 +35,7 @@ namespace DBProject
 
         private void Add_Data(object sender, EventArgs e)
         {
-            if (textBoxIsNull())
+            if (MainDL.IsAnyBoxNull(this.panel1))
             {
                 MsgDL.TextBoxEmptyError();
                 return;
@@ -55,7 +55,8 @@ namespace DBProject
         }
         private void Update_Data(object sender, EventArgs e)
         {
-            if (textBoxIsNull()) {
+            if (MainDL.IsAnyBoxNull(this.panel1))
+            {
                 MsgDL.TextBoxEmptyError();
                 return;
             }
@@ -77,7 +78,8 @@ namespace DBProject
 
         private void Delete_Data(object sender, EventArgs e)
         {
-            if (textBoxIsNull()) {
+            if (MainDL.IsAnyBoxNull(this.panel1))
+            {
                 MsgDL.TextBoxEmptyError();
                 return;
             }
@@ -86,13 +88,6 @@ namespace DBProject
             QueryDL.DeleteFromTable("CLO", "Id", id);
             
             MainDL.LoadDataOnGridTable(dataGridView1, "CLO");
-        }
-        private bool textBoxIsNull()
-        {
-            if (textBox1.Text == "") {
-                return true;
-            }
-            return false;
         }
         private void UD_Btn_Click(object sender, EventArgs e)
         {

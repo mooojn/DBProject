@@ -28,7 +28,7 @@ namespace DBProject
         }
         private void Add_Data(object sender, EventArgs e)
         {
-            if (BoxIsNull())
+            if (MainDL.IsAnyBoxNull(this.panel1))
             {
                 MsgDL.TextBoxEmptyError();
                 return;
@@ -114,14 +114,6 @@ namespace DBProject
 
             string subQuery = $" WHERE RubricId = (SELECT Id FROM Rubric WHERE Details = '{RubricDetailComboBox.Text}')";
             QueryDL.LoadComboBox(RubricLevelComboBox, "MeasurementLevel", "RubricLevel", subQuery);
-        }
-        private bool BoxIsNull()
-        {
-            if (StudentComboBox.Text == "" || ComponentComboBox.Text == "" || RubricDetailComboBox.Text == "" || RubricLevelComboBox.Text == "" || AssessmentComboBox.Text == "")
-            {
-                return true;
-            }
-            return false;
         }
     }
 }
