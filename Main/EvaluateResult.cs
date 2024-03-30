@@ -68,7 +68,7 @@ namespace DBProject
                     int stdId = Convert.ToInt32(row["StudentId"]);
                     int assessmentId = Convert.ToInt32(row["AssessmentComponentId"]);
                     int rubricId = Convert.ToInt32(row["RubricMeasurementId"]);
-                    int totalMarks = 100;// remove hardcoding
+                    int totalMarks = QueryDL.GetIdFromTable("TotalMarks", "AssessmentComponent", "Id", assessmentId.ToString());
 
                     float obtainedMarks = CalculateMarks(assessmentId, rubricId);
 

@@ -19,7 +19,7 @@ namespace DBProject
             }
             catch (Exception err)
             {
-                MessageBox.Show(err.Message);
+                MessageBox.Show("One of the attribute exists as a Foreign Key in another Table\nCan't Delete");
             }
             Program.connection.Close();
         }
